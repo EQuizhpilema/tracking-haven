@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -24,14 +23,13 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   const [endDate, setEndDate] = useState<Date>();
   const [serviceType, setServiceType] = useState('all');
   const [shipperToggle, setShipperToggle] = useState(true);
-  const [shipToToggle, setShipToToggle] = useState(true);
-  const [billerToggle, setBillerToggle] = useState(true);
+  const [consigneeToggle, setConsigneeToggle] = useState(true);
+  const [billToPartyToggle, setBillToPartyToggle] = useState(true);
   const [deliveredToggle, setDeliveredToggle] = useState(true);
   const [undeliveredToggle, setUndeliveredToggle] = useState(true);
 
   const handleDateRangeChange = (value: string) => {
     setDateRange(value);
-    // Logic to set date range based on selection
     const today = new Date();
     
     if (value === 'last7') {
@@ -56,7 +54,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
     <div className="bg-white w-64 border-r border-gray-200 p-4 h-full animate-fade-in">
       <div className="text-lg font-medium mb-6">Advanced Search Fields</div>
       
-      {/* Date Range Section */}
       <div className="mb-6">
         <div className="text-sm font-medium mb-2">Date Range</div>
         <Select value={dateRange} onValueChange={handleDateRangeChange}>
@@ -72,7 +69,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
           </SelectContent>
         </Select>
         
-        {/* Custom Date Range */}
         {dateRange === 'custom' && (
           <div className="mt-2 space-y-2">
             <div className="grid gap-2">
@@ -127,7 +123,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         )}
       </div>
       
-      {/* Service Type Section */}
       <div className="mb-6">
         <div className="text-sm font-medium mb-2">Service Type</div>
         <Select value={serviceType} onValueChange={setServiceType}>
@@ -144,7 +139,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         </Select>
       </div>
       
-      {/* View Shipments When You Are Section (Previously Billing Type) */}
       <div className="mb-6">
         <div className="text-sm font-medium mb-2">View Shipments When You Are:</div>
         <div className="space-y-2">
@@ -160,23 +154,23 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             </label>
           </div>
           <div className="flex items-center justify-between">
-            <span>Ship-To</span>
+            <span>Consignee</span>
             <label className="toggle-switch">
               <input 
                 type="checkbox" 
-                checked={shipToToggle} 
-                onChange={() => setShipToToggle(!shipToToggle)} 
+                checked={consigneeToggle} 
+                onChange={() => setConsigneeToggle(!consigneeToggle)} 
               />
               <span className="toggle-slider"></span>
             </label>
           </div>
           <div className="flex items-center justify-between">
-            <span>Biller</span>
+            <span>Bill To Party</span>
             <label className="toggle-switch">
               <input 
                 type="checkbox" 
-                checked={billerToggle} 
-                onChange={() => setBillerToggle(!billerToggle)} 
+                checked={billToPartyToggle} 
+                onChange={() => setBillToPartyToggle(!billToPartyToggle)} 
               />
               <span className="toggle-slider"></span>
             </label>
@@ -184,7 +178,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         </div>
       </div>
       
-      {/* Delivery Type Section */}
       <div className="mb-6">
         <div className="text-sm font-medium mb-2">Delivery Type</div>
         <div className="space-y-2">
@@ -213,7 +206,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         </div>
       </div>
       
-      {/* Filter Action Buttons */}
       <div className="space-y-2">
         <Button 
           className="w-full bg-tracking-blue hover:bg-blue-600 transition-colors"
