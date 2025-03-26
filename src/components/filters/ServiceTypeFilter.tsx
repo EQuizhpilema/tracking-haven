@@ -1,4 +1,21 @@
+
 import React from 'react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
+
+// Define service type options
+const serviceTypeOptions = [
+  { value: 'all', label: 'All Services' },
+  { value: 'ltl', label: 'Less Than Truckload (LTL)' },
+  { value: 'ftl', label: 'Full Truckload (FTL)' },
+  { value: 'intermodal', label: 'Intermodal' },
+  { value: 'expedited', label: 'Expedited' }
+];
 
 interface ServiceTypeFilterProps {
   serviceType: string;
