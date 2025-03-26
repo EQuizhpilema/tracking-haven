@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import DateRangeFilter from './filters/DateRangeFilter';
 import ServiceTypeFilter from './filters/ServiceTypeFilter';
@@ -50,7 +49,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
   return (
     <div className="bg-white w-64 border-r border-gray-200 p-4 h-full animate-fade-in">
-      <div className="text-lg font-medium mb-6">Advanced Search Fields</div>
+      <div className="text-lg font-medium mb-6">Shipment Filters</div>
       
       <DateRangeFilter 
         dateRange={dateRange}
