@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { CalendarDays } from 'lucide-react';
@@ -30,26 +29,26 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
       <div className="space-y-2">
         <div className="flex items-center space-x-2">
           <Button
-            variant={dateRange === 'last7' ? "default" : "outline"}
+            variant="outline"
             size="sm"
             onClick={() => onDateRangeChange('last7')}
-            className={dateRange === 'last7' ? 'bg-primary text-primary-foreground' : ''}
+            active={dateRange === 'last7'}
           >
             Last 7 Days
           </Button>
           <Button
-            variant={dateRange === 'last14' ? "default" : "outline"}
+            variant="outline"
             size="sm"
             onClick={() => onDateRangeChange('last14')}
-            className={dateRange === 'last14' ? 'bg-primary text-primary-foreground' : ''}
+            active={dateRange === 'last14'}
           >
             Last 14 Days
           </Button>
           <Button
-            variant={dateRange === 'last30' ? "default" : "outline"}
+            variant="outline"
             size="sm"
             onClick={() => onDateRangeChange('last30')}
-            className={dateRange === 'last30' ? 'bg-primary text-primary-foreground' : ''}
+            active={dateRange === 'last30'}
           >
             Last 30 Days
           </Button>

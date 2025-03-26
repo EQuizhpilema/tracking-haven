@@ -1,26 +1,9 @@
-
 import React from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
 
 interface ServiceTypeFilterProps {
   serviceType: string;
   onServiceTypeChange: (value: string) => void;
 }
-
-// Define the service type options
-const serviceTypeOptions = [
-  { value: 'all', label: 'All Services' },
-  { value: 'ltl', label: 'Less Than Truckload (LTL)' },
-  { value: 'ftl', label: 'Full Truckload (FTL)' },
-  { value: 'intermodal', label: 'Intermodal' },
-  { value: 'expedited', label: 'Expedited' }
-];
 
 const ServiceTypeFilter: React.FC<ServiceTypeFilterProps> = ({
   serviceType,
