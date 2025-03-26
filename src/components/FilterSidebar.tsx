@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -5,9 +6,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { dateRangeOptions, serviceTypeOptions } from '../data/shipmentData';
-import { Calendar as CalendarIcon, Search } from 'lucide-react';
+import { Calendar as CalendarIcon, Search, Info } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface FilterSidebarProps {
   onApplyFilter: () => void;
@@ -142,41 +144,82 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       
       <div className="mb-6">
         <div className="text-sm font-medium mb-2">View Shipments When You Are:</div>
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <span>Shipper</span>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={shipperToggle} 
-                onChange={() => setShipperToggle(!shipperToggle)} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+        <TooltipProvider>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <span>Shipper</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" className="h-4 w-4 p-0 ml-1">
+                      <Info className="h-3 w-3 text-muted-foreground" />
+                      <span className="sr-only">Info</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    You are listed as the originator of the shipment — responsible for initiating the freight movement.
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <label className="toggle-switch">
+                <input 
+                  type="checkbox" 
+                  checked={shipperToggle} 
+                  onChange={() => setShipperToggle(!shipperToggle)} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <span>Consignee</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" className="h-4 w-4 p-0 ml-1">
+                      <Info className="h-3 w-3 text-muted-foreground" />
+                      <span className="sr-only">Info</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    You are the designated recipient of the shipment — responsible for receiving the goods at the destination.
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <label className="toggle-switch">
+                <input 
+                  type="checkbox" 
+                  checked={consigneeToggle} 
+                  onChange={() => setConsigneeToggle(!consigneeToggle)} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <span>Bill To Party</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" className="h-4 w-4 p-0 ml-1">
+                      <Info className="h-3 w-3 text-muted-foreground" />
+                      <span className="sr-only">Info</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    You are assigned as the party responsible for payment of the freight charges associated with the shipment.
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <label className="toggle-switch">
+                <input 
+                  type="checkbox" 
+                  checked={billToPartyToggle} 
+                  onChange={() => setBillToPartyToggle(!billToPartyToggle)} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
-          <div className="flex items-center justify-between">
-            <span>Consignee</span>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={consigneeToggle} 
-                onChange={() => setConsigneeToggle(!consigneeToggle)} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </div>
-          <div className="flex items-center justify-between">
-            <span>Bill To Party</span>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={billToPartyToggle} 
-                onChange={() => setBillToPartyToggle(!billToPartyToggle)} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </div>
-        </div>
+        </TooltipProvider>
       </div>
       
       <div className="mb-6">
