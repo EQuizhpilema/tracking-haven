@@ -27,6 +27,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   const [billToPartyToggle, setBillToPartyToggle] = useState(true);
   const [deliveredToggle, setDeliveredToggle] = useState(true);
   const [undeliveredToggle, setUndeliveredToggle] = useState(true);
+  const [pickupsToggle, setPickupsToggle] = useState(true);
 
   const handleDateRangeChange = (value: string) => {
     setDateRange(value);
@@ -179,7 +180,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       </div>
       
       <div className="mb-6">
-        <div className="text-sm font-medium mb-2">Delivery Type</div>
+        <div className="text-sm font-medium mb-2">View by Shipment Status</div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span>Delivered</span>
@@ -199,6 +200,17 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                 type="checkbox" 
                 checked={undeliveredToggle} 
                 onChange={() => setUndeliveredToggle(!undeliveredToggle)} 
+              />
+              <span className="toggle-slider"></span>
+            </label>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Pickups</span>
+            <label className="toggle-switch">
+              <input 
+                type="checkbox" 
+                checked={pickupsToggle} 
+                onChange={() => setPickupsToggle(!pickupsToggle)} 
               />
               <span className="toggle-slider"></span>
             </label>
