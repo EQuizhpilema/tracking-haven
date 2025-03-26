@@ -1,9 +1,17 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { CalendarDays } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 interface DateRangeFilterProps {
   dateRange: string;
@@ -22,37 +30,47 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
   onStartDateChange,
   onEndDateChange
 }) => {
+  // Function to get the displayed text based on the current dateRange
+  const getDateRangeDisplayText = () => {
+    switch (dateRange) {
+      case 'last7':
+        return 'Last 7 Days';
+      case 'last14':
+        return 'Last 14 Days';
+      case 'last30':
+        return 'Last 30 Days';
+      default:
+        return 'Select Date Range';
+    }
+  };
+
   return (
     <div className="mb-6">
       <div className="text-base font-medium mb-2">Date Range</div>
       
       <div className="space-y-2">
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onDateRangeChange('last7')}
-            active={dateRange === 'last7'}
-          >
-            Last 7 Days
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onDateRangeChange('last14')}
-            active={dateRange === 'last14'}
-          >
-            Last 14 Days
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onDateRangeChange('last30')}
-            active={dateRange === 'last30'}
-          >
-            Last 30 Days
-          </Button>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full justify-between"
+            >
+              {getDateRangeDisplayText()}
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuItem onClick={() => onDateRangeChange('last7')}>
+              Last 7 Days
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onDateRangeChange('last14')}>
+              Last 14 Days
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onDateRangeChange('last30')}>
+              Last 30 Days
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <div>
           <Popover>
@@ -60,7 +78,7 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
               <Button
                 variant={"outline"}
                 className={
-                  "w-[300px] justify-start text-left font-normal" +
+                  "w-full justify-start text-left font-normal" +
                   (startDate && endDate ? " !text-foreground" : " text-muted-foreground")
                 }
               >
