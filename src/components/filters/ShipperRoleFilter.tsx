@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Info } from 'lucide-react';
@@ -23,7 +22,7 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
 }) => {
   return (
     <div className="mb-6">
-      <div className="text-sm font-medium mb-2">View Shipments Where You Are the:</div>
+      <div className="text-base font-medium mb-2">View Shipments Where You Are the:</div>
       <TooltipProvider>
         <div className="space-y-2">
           <div className="flex items-center justify-between">

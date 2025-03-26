@@ -1,13 +1,9 @@
-
 import React from 'react';
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
-import { dateRangeOptions } from '../../data/shipmentData';
+import { CalendarDays } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
 
 interface DateRangeFilterProps {
   dateRange: string;
@@ -28,72 +24,79 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
 }) => {
   return (
     <div className="mb-6">
-      <div className="text-sm font-medium mb-2">Date Range</div>
-      <Select value={dateRange} onValueChange={onDateRangeChange}>
-        <SelectTrigger className="w-full">
-          <SelectValue placeholder="Select date range" />
-        </SelectTrigger>
-        <SelectContent>
-          {dateRangeOptions.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <div className="text-base font-medium mb-2">Date Range</div>
       
-      {dateRange === 'custom' && (
-        <div className="mt-2 space-y-2">
-          <div className="grid gap-2">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !startDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {startDate ? format(startDate, "MM/dd/yy") : "Start date"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={startDate}
-                  onSelect={onStartDateChange}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-          <div className="grid gap-2">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !endDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {endDate ? format(endDate, "MM/dd/yy") : "End date"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={endDate}
-                  onSelect={onEndDateChange}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
+      <div className="space-y-2">
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onDateRangeChange('last7')}
+            active={dateRange === 'last7'}
+          >
+            Last 7 Days
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onDateRangeChange('last14')}
+            active={dateRange === 'last14'}
+          >
+            Last 14 Days
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onDateRangeChange('last30')}
+            active={dateRange === 'last30'}
+          >
+            Last 30 Days
+          </Button>
         </div>
-      )}
+
+        <div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={
+                  "w-[300px] justify-start text-left font-normal" +
+                  (startDate && endDate ? " !text-foreground" : " text-muted-foreground")
+                }
+              >
+                <CalendarDays className="mr-2 h-4 w-4" />
+                {startDate && endDate ? (
+                  <span>
+                    {format(startDate, "MMM dd, yyyy")} - {format(endDate, "MMM dd, yyyy")}
+                  </span>
+                ) : (
+                  <span>Pick a date range</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="center">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={startDate ? startDate : new Date()}
+                selected={{
+                  from: startDate,
+                  to: endDate,
+                }}
+                onSelect={(range) => {
+                  if (range?.from) {
+                    onStartDateChange(range.from);
+                  }
+                  if (range?.to) {
+                    onEndDateChange(range.to);
+                  }
+                }}
+                numberOfMonths={2}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+      </div>
     </div>
   );
 };

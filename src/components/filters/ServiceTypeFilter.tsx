@@ -1,7 +1,4 @@
-
 import React from 'react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { serviceTypeOptions } from '../../data/shipmentData';
 
 interface ServiceTypeFilterProps {
   serviceType: string;
@@ -14,7 +11,7 @@ const ServiceTypeFilter: React.FC<ServiceTypeFilterProps> = ({
 }) => {
   return (
     <div className="mb-6">
-      <div className="text-sm font-medium mb-2">Service Type</div>
+      <div className="text-base font-medium mb-2">Service Type</div>
       <Select value={serviceType} onValueChange={onServiceTypeChange}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select service type" />
