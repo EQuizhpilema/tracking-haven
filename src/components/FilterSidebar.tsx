@@ -54,7 +54,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
   return (
     <div className="bg-white w-64 border-r border-gray-200 p-4 h-full animate-fade-in">
-      <div className="text-lg font-medium mb-6">Filters</div>
+      <div className="text-lg font-medium mb-6">Advanced Search Fields</div>
       
       {/* Date Range Section */}
       <div className="mb-6">
@@ -144,18 +144,9 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         </Select>
       </div>
       
-      {/* Postal Codes Section */}
+      {/* View Shipments When You Are Section (Previously Billing Type) */}
       <div className="mb-6">
-        <div className="text-sm font-medium mb-2">Postal Codes</div>
-        <div className="flex space-x-2">
-          <Input placeholder="Ship From" className="w-1/2" />
-          <Input placeholder="Deliver To" className="w-1/2" />
-        </div>
-      </div>
-      
-      {/* Billing Type Section */}
-      <div className="mb-6">
-        <div className="text-sm font-medium mb-2">Billing Type</div>
+        <div className="text-sm font-medium mb-2">View Shipments When You Are:</div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span>Shipper</span>
