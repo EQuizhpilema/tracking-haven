@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Info } from 'lucide-react';
@@ -36,7 +37,7 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  You are listed as the originator of the shipment — responsible for initiating the freight movement.
+                  You are listed as the shipper — the shipment was or will be picked up from your location.
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -60,7 +61,7 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  You are the designated recipient of the shipment — responsible for receiving the goods at the destination.
+                  You are listed as the receiving party for the final delivery of the shipment.
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -84,7 +85,7 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  You are assigned as the party responsible for payment of the freight charges associated with the shipment.
+                  You are listed as the party responsible for paying the freight charges.
                 </TooltipContent>
               </Tooltip>
             </div>

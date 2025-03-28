@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Info } from 'lucide-react';
@@ -36,7 +37,7 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  The shipment has been delivered to the consignee. All LTL freight handling and final delivery confirmations have been completed.
+                  The shipment has been delivered to the consignee.
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -60,7 +61,7 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  The shipment has not yet reached final delivery. It may be in transit, at a terminal, or pending delivery scheduling.
+                  The shipment has not yet reached final delivery.
                 </TooltipContent>
               </Tooltip>
             </div>
