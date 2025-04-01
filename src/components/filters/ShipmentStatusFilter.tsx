@@ -25,7 +25,7 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
     <div className="mb-6">
       <div className="text-base font-medium mb-2">View by Shipment Status</div>
       <TooltipProvider>
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <span>Delivered</span>

@@ -2,16 +2,21 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, FileText } from 'lucide-react';
+import { Search, FileText, Filter } from 'lucide-react';
 import FilterSidebar from './FilterSidebar';
 import ShipmentTable from './ShipmentTable';
+import ShipmentCard from './ShipmentCard';
 import { shipmentData } from '../data/shipmentData';
 import { toast } from "@/components/ui/use-toast";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const ShipmentTracking: React.FC = () => {
   const [showFilters, setShowFilters] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(shipmentData);
+  const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -37,6 +42,9 @@ const ShipmentTracking: React.FC = () => {
       title: "Filters Applied",
       description: "Your filter settings have been applied to the data.",
     });
+    if (isMobile) {
+      setIsFilterDrawerOpen(false);
+    }
     // In a real app, this would implement actual filtering logic
   };
 
@@ -64,8 +72,8 @@ const ShipmentTracking: React.FC = () => {
       </div>
       
       <div className="flex">
-        {/* Sidebar */}
-        {showFilters && (
+        {/* Desktop Sidebar */}
+        {!isMobile && showFilters && (
           <aside className="h-[calc(100vh-120px)] overflow-auto animate-slide-in">
             <FilterSidebar 
               onApplyFilter={handleApplyFilter}
@@ -75,19 +83,41 @@ const ShipmentTracking: React.FC = () => {
         )}
         
         {/* Main Content */}
-        <main className="flex-1 px-6 pb-6 h-[calc(100vh-120px)] overflow-auto">
+        <main className="flex-1 px-4 md:px-6 pb-6 h-[calc(100vh-120px)] overflow-auto">
           {/* Top Controls */}
-          <div className="flex justify-between items-center mb-6">
-            <Button
-              variant="outline"
-              className="flex items-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <Search className="mr-2 h-4 w-4" />
-              {showFilters ? 'Hide Filters' : 'Show Filters'}
-            </Button>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-3">
+            {isMobile ? (
+              <Drawer open={isFilterDrawerOpen} onOpenChange={setIsFilterDrawerOpen}>
+                <DrawerTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full md:w-auto flex items-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
+                  >
+                    <Filter className="mr-2 h-4 w-4" />
+                    Filters
+                  </Button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <div className="px-4 py-2 h-[80vh] overflow-auto">
+                    <FilterSidebar 
+                      onApplyFilter={handleApplyFilter}
+                      onResetFilter={handleResetFilter}
+                    />
+                  </div>
+                </DrawerContent>
+              </Drawer>
+            ) : (
+              <Button
+                variant="outline"
+                className="w-full md:w-auto flex items-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                <Search className="mr-2 h-4 w-4" />
+                {showFilters ? 'Hide Filters' : 'Show Filters'}
+              </Button>
+            )}
             
-            <div className="flex-1 mx-4">
+            <div className="flex-1 w-full md:w-auto md:mx-4">
               <Input
                 placeholder="Search by Shipment Number, BOL, Shipper, or Ship-To"
                 className="w-full"
@@ -98,7 +128,7 @@ const ShipmentTracking: React.FC = () => {
             
             <Button
               variant="outline"
-              className="flex items-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
+              className="w-full md:w-auto mt-3 md:mt-0 flex items-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
               onClick={handleExportToExcel}
             >
               <FileText className="mr-2 h-4 w-4" />
@@ -106,8 +136,16 @@ const ShipmentTracking: React.FC = () => {
             </Button>
           </div>
           
-          {/* Table */}
-          <ShipmentTable data={filteredData} />
+          {/* Table or Card View based on screen size */}
+          {isMobile ? (
+            <div className="space-y-4">
+              {filteredData.map((shipment) => (
+                <ShipmentCard key={shipment.id} shipment={shipment} />
+              ))}
+            </div>
+          ) : (
+            <ShipmentTable data={filteredData} />
+          )}
         </main>
       </div>
     </div>
