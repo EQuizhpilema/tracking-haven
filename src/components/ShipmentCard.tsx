@@ -9,25 +9,8 @@ interface ShipmentCardProps {
 }
 
 const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
-  const getStatusClassName = (status: string) => {
-    switch(status) {
-      case 'Routed':
-        return 'text-blue-600';
-      case 'Shipment Created':
-        return 'text-tracking-warning';
-      case 'In Transit':
-        return 'text-purple-600';
-      case 'Delivered':
-        return 'text-tracking-success';
-      case 'Exception':
-        return 'text-tracking-danger';
-      default:
-        return '';
-    }
-  };
-
   return (
-    <div className="py-4">
+    <div className="py-3">
       <div className="mb-2">
         <div className="flex justify-between items-start">
           <div>
@@ -37,7 +20,7 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
               BOL/Ref# {shipment.bolRefs}
             </div>
           </div>
-          <div className={cn("font-medium", getStatusClassName(shipment.status))}>
+          <div className="font-medium text-gray-700">
             {shipment.status}
           </div>
         </div>
@@ -50,7 +33,7 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
           Estimated Delivery {shipment.etaDate}
         </div>
       </div>
-      <Separator className="mt-4 bg-gray-200" />
+      <Separator className="mt-3 bg-gray-200" />
     </div>
   );
 };
