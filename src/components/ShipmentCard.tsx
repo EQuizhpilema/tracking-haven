@@ -10,7 +10,7 @@ interface ShipmentCardProps {
 
 const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
   return (
-    <div className="py-3">
+    <div className="flex flex-col justify-center py-2">
       <div className="mb-2">
         <div className="flex justify-between items-start">
           <div>
@@ -39,4 +39,3 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
 };
 
 export default ShipmentCard;
-
