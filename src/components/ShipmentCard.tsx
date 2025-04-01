@@ -25,7 +25,7 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
           </div>
         </div>
       </div>
-      <div className="text-sm">
+      <div className="text-sm mb-3">
         <div className="mb-1">
           {shipment.shipperCity} To {shipment.consigneeCity}, {shipment.province}
         </div>
