@@ -33,9 +33,10 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
           Estimated Delivery {shipment.etaDate}
         </div>
       </div>
-      <Separator className="mt-3 bg-gray-200" />
+      <Separator className="mt-2 bg-gray-200" />
     </div>
   );
 };
 
 export default ShipmentCard;
+
