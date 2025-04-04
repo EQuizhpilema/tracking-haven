@@ -108,5 +108,23 @@ export const shipmentData: ShipmentData[] = [
     puPartnerPro: '155902182',
     delPartnerPro: '',
     onTime: 'Yes'
+  },
+  {
+    id: '6',
+    shipDate: '04/02/25',
+    deliveryDateTime: '04/04/25 14:30 PM',
+    etaDate: '04/03/25',
+    shipmentNumber: '811836922',
+    bolRefs: 'LT58942',
+    shipper: 'GLOBAL LOGISTICS INC',
+    shipperCity: 'PORTLAND',
+    shipTo: 'WESTSIDE DISTRIBUTORS',
+    consigneeCity: 'SEATTLE',
+    province: 'WA',
+    zip: '98101',
+    status: 'Delayed - Weather',
+    puPartnerPro: '165971234',
+    delPartnerPro: '183456789',
+    onTime: 'No'
   }
 ];
