@@ -44,7 +44,7 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
 
   return (
     <div className="mb-3">
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start pr-4"> {/* Added pr-4 for right padding */}
         <div>
           <h3 className="font-bold">{shipment.shipper}</h3>
           <div className="text-blue-600">
@@ -57,14 +57,14 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-sm text-black">
+          <span className="text-md font-semibold text-black"> {/* Increased text size and added font-semibold */}
             {statusText}
           </span>
           <div className="mt-1">
             {isDelivered ? (
-              <CheckCircle size={16} className="text-tracking-success" />
+              <CheckCircle size={24} className="text-tracking-success" /> // Increased icon size
             ) : (
-              <Truck size={16} className="text-tracking-blue" />
+              <Truck size={24} className="text-tracking-blue" /> // Increased icon size
             )}
           </div>
         </div>
