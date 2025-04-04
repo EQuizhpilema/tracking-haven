@@ -2,6 +2,7 @@
 import React from 'react';
 import { TableRow, TableCell } from "@/components/ui/table";
 import { ShipmentData } from '@/data/shipmentData';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 interface ShipmentTableRowProps {
   shipment: ShipmentData;
@@ -28,7 +29,15 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
       <TableCell>{shipment.status}</TableCell>
       <TableCell>{shipment.puPartnerPro || '-'}</TableCell>
       <TableCell>{shipment.delPartnerPro || '-'}</TableCell>
-      <TableCell>{shipment.onTime || '-'}</TableCell>
+      <TableCell>
+        {shipment.onTime === 'Yes' ? (
+          <CheckCircle className="h-5 w-5 text-tracking-success" />
+        ) : shipment.onTime === 'No' ? (
+          <XCircle className="h-5 w-5 text-tracking-danger" />
+        ) : (
+          '-'
+        )}
+      </TableCell>
     </TableRow>
   );
 };
