@@ -36,7 +36,7 @@ const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
             <SortableHeader field="deliveryDateTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Delivery Date and Time</SortableHeader>
             <SortableHeader field="etaDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>ETA Date</SortableHeader>
             <SortableHeader field="shipmentNumber" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipment Number</SortableHeader>
-            <SortableHeader field="bolRefs" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>BOL/Ref #</SortableHeader>
+            <SortableHeader field="bolRefs" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>BOL / Reference Number</SortableHeader>
             <SortableHeader field="shipper" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper</SortableHeader>
             <SortableHeader field="shipperCity" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper City</SortableHeader>
             <SortableHeader field="shipTo" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Consignee</SortableHeader>
