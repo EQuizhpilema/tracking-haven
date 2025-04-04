@@ -18,30 +18,30 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
   displayStatus = displayStatus.replace(/ on \d{2}\/\d{2}\/\d{2}/, '');
 
   return (
-    <TableRow key={shipment.id}>
-      <TableCell>{shipment.shipDate}</TableCell>
-      <TableCell>{shipment.deliveryDateTime || '-'}</TableCell>
-      <TableCell>{shipment.etaDate}</TableCell>
-      <TableCell className="font-medium text-blue-600">
+    <TableRow key={shipment.id} className="h-[36px]">
+      <TableCell className="p-2 whitespace-nowrap">{shipment.shipDate}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.deliveryDateTime || '-'}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.etaDate}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap font-medium text-blue-600">
         <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
           {shipment.shipmentNumber}
         </a>
       </TableCell>
-      <TableCell>{shipment.bolRefs}</TableCell>
-      <TableCell>{shipment.shipper}</TableCell>
-      <TableCell>{shipment.shipperCity}</TableCell>
-      <TableCell>{shipment.shipTo}</TableCell>
-      <TableCell>{shipment.consigneeCity}</TableCell>
-      <TableCell>{shipment.province}</TableCell>
-      <TableCell>{shipment.zip}</TableCell>
-      <TableCell>{displayStatus}</TableCell>
-      <TableCell>{shipment.puPartnerPro || '-'}</TableCell>
-      <TableCell>{shipment.delPartnerPro || '-'}</TableCell>
-      <TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.bolRefs}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.shipper}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.shipperCity}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.shipTo}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.consigneeCity}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.province}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.zip}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{displayStatus}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.puPartnerPro || '-'}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.delPartnerPro || '-'}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap text-center">
         {shipment.onTime === 'Yes' ? (
-          <CheckCircle className="h-5 w-5 text-tracking-success" />
+          <CheckCircle className="h-4 w-4 text-tracking-success inline-block" />
         ) : shipment.onTime === 'No' ? (
-          <XCircle className="h-5 w-5 text-tracking-danger" />
+          <XCircle className="h-4 w-4 text-tracking-danger inline-block" />
         ) : (
           '-'
         )}
