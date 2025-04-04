@@ -2,6 +2,7 @@
 import React from 'react';
 import { ShipmentData } from '@/data/shipmentData';
 import { format, parse } from 'date-fns';
+import { Truck, CheckCircle } from 'lucide-react';
 
 interface ShipmentDetailsProps {
   shipment: ShipmentData;
@@ -90,12 +91,39 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
     }
   };
 
+  // Get status display with icon
+  const getStatusDisplay = () => {
+    const statusText = shipment.status.split(' on ')[0]; // Remove the date part
+    
+    if (shipment.status.includes('Delivered')) {
+      return (
+        <div className="flex flex-col items-end">
+          <div className="text-sm mb-1">{statusText}</div>
+          <CheckCircle className="text-tracking-success h-5 w-5" />
+        </div>
+      );
+    } else {
+      // For in-transit or other statuses
+      return (
+        <div className="flex flex-col items-end">
+          <div className="text-sm mb-1">{statusText}</div>
+          <Truck className="text-tracking-blue h-5 w-5" />
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="text-sm mb-4">
-      <div className="mb-1">
-        {shipment.shipperCity} To {shipment.consigneeCity}, {shipment.province}
+      <div className="flex justify-between">
+        <div>
+          <div className="mb-1">
+            {shipment.shipperCity} To {shipment.consigneeCity}, {shipment.province}
+          </div>
+          {getDeliveryInfo()}
+        </div>
+        {getStatusDisplay()}
       </div>
-      {getDeliveryInfo()}
     </div>
   );
 };
