@@ -1,11 +1,29 @@
-import { ShipmentData } from './shipmentData';
+
+export interface ShipmentData {
+  id: string;
+  shipDate: string;
+  deliveryDateTime: string;
+  etaDate: string;
+  shipmentNumber: string;
+  bolRefs: string;
+  shipper: string;
+  shipperCity: string;
+  shipTo: string;
+  consigneeCity: string;
+  province: string;
+  zip: string;
+  status: string;
+  puPartnerPro: string;
+  delPartnerPro: string;
+  onTime: string;
+}
 
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
-    shipDate: '04/03/2025',
+    shipDate: '04/03/25',
     deliveryDateTime: 'OFD ETA 10:17 AM',
-    etaDate: '04/03/2025',
+    etaDate: '04/03/25',
     shipmentNumber: '811836865',
     bolRefs: '133200',
     shipper: 'SPR PACKAGING LLC',
@@ -21,9 +39,9 @@ export const shipmentData: ShipmentData[] = [
   },
   {
     id: '2',
-    shipDate: '04/03/2025',
-    deliveryDateTime: '04/04/2025 08:35 AM',
-    etaDate: '04/03/2025',
+    shipDate: '04/03/25',
+    deliveryDateTime: '04/04/25 08:35 AM',
+    etaDate: '04/03/25',
     shipmentNumber: '811836699',
     bolRefs: 'UNKNOWN',
     shipper: 'AMERICAN INFRASTRUCTURE',
@@ -39,9 +57,9 @@ export const shipmentData: ShipmentData[] = [
   },
   {
     id: '3',
-    shipDate: '04/03/2025',
+    shipDate: '04/03/25',
     deliveryDateTime: '',
-    etaDate: '04/03/2025',
+    etaDate: '04/03/25',
     shipmentNumber: '811836194',
     bolRefs: 'HU2579',
     shipper: 'KINGSTON BRASS INC',
@@ -57,9 +75,9 @@ export const shipmentData: ShipmentData[] = [
   },
   {
     id: '4',
-    shipDate: '04/03/2025',
+    shipDate: '04/03/25',
     deliveryDateTime: '',
-    etaDate: '04/03/2025',
+    etaDate: '04/03/25',
     shipmentNumber: '811836384',
     bolRefs: '3817567',
     shipper: 'ALEO LIGHTING',
@@ -75,9 +93,9 @@ export const shipmentData: ShipmentData[] = [
   },
   {
     id: '5',
-    shipDate: '04/03/2025',
+    shipDate: '04/03/25',
     deliveryDateTime: '',
-    etaDate: '04/03/2025',
+    etaDate: '04/03/25',
     shipmentNumber: '811836156',
     bolRefs: 'UNKNOWN',
     shipper: 'EPLASTICS',
