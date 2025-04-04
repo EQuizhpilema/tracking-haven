@@ -11,8 +11,7 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
   return (
     <TableRow key={shipment.id}>
       <TableCell>{shipment.shipDate}</TableCell>
-      <TableCell>{shipment.deliveryDate}</TableCell>
-      <TableCell>{shipment.deliveryTime || '-'}</TableCell>
+      <TableCell>{shipment.deliveryDateTime || '-'}</TableCell>
       <TableCell>{shipment.etaDate}</TableCell>
       <TableCell className="font-medium text-blue-600">
         <a href={`#${shipment.shipmentNumber}`} className="hover:underline">

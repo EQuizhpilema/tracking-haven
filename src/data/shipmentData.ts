@@ -1,9 +1,7 @@
-
 export interface ShipmentData {
   id: string;
   shipDate: string;
-  deliveryDate: string;
-  deliveryTime?: string;
+  deliveryDateTime?: string; // Combined delivery date and time
   etaDate: string;
   shipmentNumber: string;
   bolRefs: string;
@@ -23,8 +21,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '1',
     shipDate: '04/03/2025',
-    deliveryDate: '',
-    deliveryTime: '',
+    deliveryDateTime: '',
     etaDate: '',
     shipmentNumber: '811836865',
     bolRefs: '133200',
@@ -42,8 +39,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '2',
     shipDate: '04/03/2025',
-    deliveryDate: '',
-    deliveryTime: '',
+    deliveryDateTime: '',
     etaDate: '',
     shipmentNumber: '811836699',
     bolRefs: 'UNKNOWN',
@@ -61,8 +57,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '3',
     shipDate: '04/03/2025',
-    deliveryDate: '',
-    deliveryTime: '',
+    deliveryDateTime: '',
     etaDate: '',
     shipmentNumber: '811836194',
     bolRefs: 'HU2579',
@@ -80,8 +75,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '4',
     shipDate: '04/03/2025',
-    deliveryDate: '',
-    deliveryTime: '',
+    deliveryDateTime: '',
     etaDate: '',
     shipmentNumber: '811836384',
     bolRefs: '3817567',
@@ -99,8 +93,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '5',
     shipDate: '04/03/2025',
-    deliveryDate: '',
-    deliveryTime: '',
+    deliveryDateTime: '',
     etaDate: '',
     shipmentNumber: '811836156',
     bolRefs: 'UNKNOWN',
