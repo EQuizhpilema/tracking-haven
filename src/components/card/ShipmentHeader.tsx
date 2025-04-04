@@ -56,15 +56,17 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
             BOL/Ref# {shipment.bolRefs}
           </div>
         </div>
-        <div className="flex items-center">
-          {isDelivered ? (
-            <CheckCircle size={16} className="text-tracking-success mr-1" />
-          ) : (
-            <Truck size={16} className="text-tracking-blue mr-1" />
-          )}
-          <span className={`text-sm ${isDelivered ? 'text-tracking-success' : 'text-tracking-blue'}`}>
+        <div className="flex flex-col items-end">
+          <span className="text-sm text-black">
             {statusText}
           </span>
+          <div className="mt-1">
+            {isDelivered ? (
+              <CheckCircle size={16} className="text-tracking-success" />
+            ) : (
+              <Truck size={16} className="text-tracking-blue" />
+            )}
+          </div>
         </div>
       </div>
     </div>
