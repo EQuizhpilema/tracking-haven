@@ -3,6 +3,7 @@ export interface ShipmentData {
   id: string;
   shipDate: string;
   deliveryDate: string;
+  deliveryTime?: string;
   etaDate: string;
   shipmentNumber: string;
   bolRefs: string;
@@ -12,84 +13,107 @@ export interface ShipmentData {
   consigneeCity: string;
   province: string;
   zip: string;
-  status: 'Routed' | 'Shipment Created' | 'In Transit' | 'Delivered' | 'Exception';
+  status: string;
+  puPartnerPro?: string;
+  delPartnerPro?: string;
+  onTime?: string;
 }
 
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
-    shipDate: '03/21/25',
-    deliveryDate: '-',
-    etaDate: '-',
-    shipmentNumber: 'PU12716',
-    bolRefs: 'PU12716',
-    shipper: 'restricted',
-    shipperCity: '-',
-    shipTo: '-',
-    consigneeCity: '-',
-    province: '-',
-    zip: '-',
-    status: 'Routed'
+    shipDate: '04/03/2025',
+    deliveryDate: '04/04/2025',
+    deliveryTime: 'OFD ETA 10:17 AM',
+    etaDate: '04/04/2025',
+    shipmentNumber: '811836865',
+    bolRefs: '133200',
+    shipper: 'SPR PACKAGING LLC',
+    shipperCity: 'ROCKWALL',
+    shipTo: 'SWANSON BARK',
+    consigneeCity: 'LONGVIEW',
+    province: 'WA',
+    zip: '98632',
+    status: 'Out For Delivery on 04/04/25',
+    puPartnerPro: '165962424',
+    delPartnerPro: '',
+    onTime: 'Yes'
   },
   {
     id: '2',
-    shipDate: '03/21/25',
-    deliveryDate: '-',
-    etaDate: '03/24/25',
-    shipmentNumber: '629528',
-    bolRefs: '629528',
-    shipper: 'HOTSIDE CROSSFIT',
-    shipperCity: 'ORLAND PARK',
-    shipTo: 'STARBUCKS ORLAND PARK',
-    consigneeCity: 'ORLAND PARK',
-    province: 'IL',
-    zip: '60462',
-    status: 'Shipment Created'
+    shipDate: '04/03/2025',
+    deliveryDate: '04/04/2025',
+    deliveryTime: 'OFD ETA 09:47 AM',
+    etaDate: '04/04/2025',
+    shipmentNumber: '811836699',
+    bolRefs: 'UNKNOWN',
+    shipper: 'AMERICAN INFRASTRUCTURE',
+    shipperCity: 'FORT WORTH',
+    shipTo: 'COLUMBIA PRECAST PRO',
+    consigneeCity: 'WOODLAND',
+    province: 'WA',
+    zip: '98674',
+    status: 'Out For Delivery on 04/04/25',
+    puPartnerPro: '153753231',
+    delPartnerPro: '',
+    onTime: 'Yes'
   },
   {
     id: '3',
-    shipDate: '03/22/25',
-    deliveryDate: '03/25/25',
-    etaDate: '03/25/25',
-    shipmentNumber: '629530',
-    bolRefs: '629530',
-    shipper: 'APEX LOGISTICS',
-    shipperCity: 'CHICAGO',
-    shipTo: 'TARGET DISTRIBUTION',
-    consigneeCity: 'JOLIET',
-    province: 'IL',
-    zip: '60436',
-    status: 'In Transit'
+    shipDate: '04/03/2025',
+    deliveryDate: '04/04/2025',
+    deliveryTime: 'OFD ETA 08:13 AM',
+    etaDate: '04/04/2025',
+    shipmentNumber: '811836194',
+    bolRefs: 'HU2579',
+    shipper: 'KINGSTON BRASS INC',
+    shipperCity: 'CHINO',
+    shipTo: 'GROVER ELECT & PLBG S',
+    consigneeCity: 'VANCOUVER',
+    province: 'WA',
+    zip: '98665',
+    status: 'Out For Delivery on 04/04/25',
+    puPartnerPro: '156717829',
+    delPartnerPro: '',
+    onTime: 'Yes'
   },
   {
     id: '4',
-    shipDate: '03/19/25',
-    deliveryDate: '03/22/25',
-    etaDate: '03/23/25',
-    shipmentNumber: '629510',
-    bolRefs: '629510',
-    shipper: 'ACME SUPPLIES',
-    shipperCity: 'NAPERVILLE',
-    shipTo: 'WALMART SUPERCENTER',
-    consigneeCity: 'AURORA',
-    province: 'IL',
-    zip: '60504',
-    status: 'Delivered'
+    shipDate: '04/03/2025',
+    deliveryDate: '04/04/2025',
+    deliveryTime: 'OFD ETA 07:50 AM',
+    etaDate: '04/04/2025',
+    shipmentNumber: '811836384',
+    bolRefs: '3817567',
+    shipper: 'ALEO LIGHTING',
+    shipperCity: 'SANTA FE SPRINGS',
+    shipTo: 'NETZERO ENERGY LLC',
+    consigneeCity: 'VANCOUVER',
+    province: 'WA',
+    zip: '98682',
+    status: 'Out For Delivery on 04/04/25',
+    puPartnerPro: '165967332',
+    delPartnerPro: '',
+    onTime: 'Yes'
   },
   {
     id: '5',
-    shipDate: '03/20/25',
-    deliveryDate: '-',
-    etaDate: '03/24/25',
-    shipmentNumber: '629515',
-    bolRefs: '629515',
-    shipper: 'GLOBAL SHIPPING CO',
-    shipperCity: 'EVANSTON',
-    shipTo: 'NORTHBROOK MALL',
-    consigneeCity: 'NORTHBROOK',
-    province: 'IL',
-    zip: '60062',
-    status: 'Exception'
+    shipDate: '04/03/2025',
+    deliveryDate: '04/04/2025',
+    deliveryTime: 'OFD ETA 07:49 AM',
+    etaDate: '04/04/2025',
+    shipmentNumber: '811836156',
+    bolRefs: 'UNKNOWN',
+    shipper: 'EPLASTICS',
+    shipperCity: 'SAN DIEGO',
+    shipTo: 'CORNELL PUMP',
+    consigneeCity: 'CLACKAMAS',
+    province: 'OR',
+    zip: '97015',
+    status: 'Out For Delivery on 04/04/25',
+    puPartnerPro: '155902182',
+    delPartnerPro: '',
+    onTime: 'Yes'
   }
 ];
 
