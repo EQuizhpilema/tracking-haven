@@ -1,4 +1,24 @@
 
+export interface ShipmentData {
+  id: string;
+  shipDate: string;
+  deliveryDate: string;
+  deliveryTime?: string;
+  etaDate: string;
+  shipmentNumber: string;
+  bolRefs: string;
+  shipper: string;
+  shipperCity: string;
+  shipTo: string;
+  consigneeCity: string;
+  province: string;
+  zip: string;
+  status: string;
+  puPartnerPro?: string;
+  delPartnerPro?: string;
+  onTime?: string;
+}
+
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
