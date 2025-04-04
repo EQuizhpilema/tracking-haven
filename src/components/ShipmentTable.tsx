@@ -28,33 +28,35 @@ const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
   const currentData = sortedData.slice(start, end);
 
   return (
-    <div className="w-full overflow-auto animate-fade-in">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <SortableHeader field="shipDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Ship Date</SortableHeader>
-            <SortableHeader field="deliveryDateTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Delivery Date and Time</SortableHeader>
-            <SortableHeader field="etaDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>ETA Date</SortableHeader>
-            <SortableHeader field="shipmentNumber" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipment Number</SortableHeader>
-            <SortableHeader field="bolRefs" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>BOL / Reference Number</SortableHeader>
-            <SortableHeader field="shipper" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper</SortableHeader>
-            <SortableHeader field="shipperCity" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper City</SortableHeader>
-            <SortableHeader field="shipTo" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Consignee</SortableHeader>
-            <SortableHeader field="consigneeCity" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Consignee City</SortableHeader>
-            <SortableHeader field="province" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>State</SortableHeader>
-            <SortableHeader field="zip" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Zip</SortableHeader>
-            <SortableHeader field="status" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Status</SortableHeader>
-            <SortableHeader field="puPartnerPro" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>PU Partner Pro</SortableHeader>
-            <SortableHeader field="delPartnerPro" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Del Partner Pro</SortableHeader>
-            <SortableHeader field="onTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>On Time</SortableHeader>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {currentData.map((shipment) => (
-            <ShipmentTableRow key={shipment.id} shipment={shipment} />
-          ))}
-        </TableBody>
-      </Table>
+    <div className="w-full overflow-auto animate-fade-in max-w-full">
+      <div className="min-w-max">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <SortableHeader field="shipDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Ship Date</SortableHeader>
+              <SortableHeader field="deliveryDateTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Delivery Date and Time</SortableHeader>
+              <SortableHeader field="etaDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>ETA Date</SortableHeader>
+              <SortableHeader field="shipmentNumber" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipment Number</SortableHeader>
+              <SortableHeader field="bolRefs" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>BOL / Reference Number</SortableHeader>
+              <SortableHeader field="shipper" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper</SortableHeader>
+              <SortableHeader field="shipperCity" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper City</SortableHeader>
+              <SortableHeader field="shipTo" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Consignee</SortableHeader>
+              <SortableHeader field="consigneeCity" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Consignee City</SortableHeader>
+              <SortableHeader field="province" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>State</SortableHeader>
+              <SortableHeader field="zip" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Zip</SortableHeader>
+              <SortableHeader field="status" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Status</SortableHeader>
+              <SortableHeader field="puPartnerPro" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>PU Partner Pro</SortableHeader>
+              <SortableHeader field="delPartnerPro" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Del Partner Pro</SortableHeader>
+              <SortableHeader field="onTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>On Time</SortableHeader>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentData.map((shipment) => (
+              <ShipmentTableRow key={shipment.id} shipment={shipment} />
+            ))}
+          </TableBody>
+        </Table>
+      </div>
       
       {/* Pagination Controls */}
       <TablePagination
