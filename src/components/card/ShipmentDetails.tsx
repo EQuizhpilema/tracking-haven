@@ -36,96 +36,50 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
 
   return (
     <div className="space-y-2 text-sm">
-      {/* Reordered for mobile view: Shipper, Shipment Number, BOL/Reference, PU Partner Pro, Delivery Partner Pro */}
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Shipper:</span>
-        <span className="text-right">{shipment.shipper}</span>
+      <div>{shipment.shipper}</div>
+      
+      <div className="font-medium text-blue-600">
+        <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
+          {shipment.shipmentNumber}
+        </a>
       </div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Shipment #:</span>
-        <span className="text-right font-medium text-blue-600">
-          <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
-            {shipment.shipmentNumber}
-          </a>
-        </span>
-      </div>
+      <div>{shipment.bolRefs}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">BOL / Reference #:</span>
-        <span className="text-right">{shipment.bolRefs}</span>
-      </div>
+      <div>{shipment.puPartnerPro || '-'}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">PU Partner Pro:</span>
-        <span className="text-right">{shipment.puPartnerPro || '-'}</span>
-      </div>
+      <div>{shipment.delPartnerPro || '-'}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Del Partner Pro:</span>
-        <span className="text-right">{shipment.delPartnerPro || '-'}</span>
-      </div>
+      <div>{shipment.shipDate}</div>
       
-      {/* Additional details below the key information */}
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Ship Date:</span>
-        <span className="text-right">{shipment.shipDate}</span>
-      </div>
+      <div>{formatDeliveryDateTime()}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Delivery Date & Time:</span>
-        <span className="text-right">{formatDeliveryDateTime()}</span>
-      </div>
+      <div>{shipment.etaDate}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">ETA Date:</span>
-        <span className="text-right">{shipment.etaDate}</span>
-      </div>
+      <div>{shipment.shipTo}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Ship To:</span>
-        <span className="text-right">{shipment.shipTo}</span>
-      </div>
+      <div>{shipment.shipperCity}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Shipper City:</span>
-        <span className="text-right">{shipment.shipperCity}</span>
-      </div>
+      <div>{shipment.consigneeCity}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Consignee City:</span>
-        <span className="text-right">{shipment.consigneeCity}</span>
-      </div>
+      <div>{shipment.province}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">State:</span>
-        <span className="text-right">{shipment.province}</span>
-      </div>
+      <div>{shipment.zip}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Zip:</span>
-        <span className="text-right">{shipment.zip}</span>
-      </div>
+      <div>{displayStatus}</div>
       
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">Status:</span>
-        <span className="text-right">{displayStatus}</span>
-      </div>
-      
-      <div className="flex justify-between items-start">
-        <span className="font-medium text-gray-600">On Time:</span>
-        <span className="text-right">
-          {shipment.onTime === 'Yes' ? (
-            <CheckCircle className="h-4 w-4 text-tracking-success inline-block" />
-          ) : shipment.onTime === 'No' ? (
-            <XCircle className="h-4 w-4 text-tracking-danger inline-block" />
-          ) : (
-            '-'
-          )}
-        </span>
+      <div>
+        {shipment.onTime === 'Yes' ? (
+          <CheckCircle className="h-4 w-4 text-tracking-success inline-block" />
+        ) : shipment.onTime === 'No' ? (
+          <XCircle className="h-4 w-4 text-tracking-danger inline-block" />
+        ) : (
+          '-'
+        )}
       </div>
     </div>
   );
 };
 
 export default ShipmentDetails;
+
