@@ -17,10 +17,28 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
   // Remove date information from the status
   displayStatus = displayStatus.replace(/ on \d{2}\/\d{2}\/\d{2}/, '');
 
+  // Format delivery date and time to show date on first line and time on second line
+  const formatDeliveryDateTime = () => {
+    if (!shipment.deliveryDateTime) return '-';
+    
+    // Check if the delivery date time contains both date and time components
+    if (shipment.deliveryDateTime.includes(' ')) {
+      const [date, time] = shipment.deliveryDateTime.split(' ');
+      return (
+        <>
+          <div>{date}</div>
+          <div>{time}</div>
+        </>
+      );
+    }
+    
+    return shipment.deliveryDateTime;
+  };
+
   return (
-    <TableRow key={shipment.id} className="h-[36px]">
+    <TableRow key={shipment.id} className="h-[36px] text-xs">
       <TableCell className="p-2 whitespace-nowrap">{shipment.shipDate}</TableCell>
-      <TableCell className="p-2 whitespace-nowrap">{shipment.deliveryDateTime || '-'}</TableCell>
+      <TableCell className="p-2">{formatDeliveryDateTime()}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.etaDate}</TableCell>
       <TableCell className="p-2 whitespace-nowrap font-medium text-blue-600">
         <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
