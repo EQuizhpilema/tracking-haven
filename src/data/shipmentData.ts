@@ -1,31 +1,11 @@
 
-export interface ShipmentData {
-  id: string;
-  shipDate: string;
-  deliveryDate: string;
-  deliveryTime?: string;
-  etaDate: string;
-  shipmentNumber: string;
-  bolRefs: string;
-  shipper: string;
-  shipperCity: string;
-  shipTo: string;
-  consigneeCity: string;
-  province: string;
-  zip: string;
-  status: string;
-  puPartnerPro?: string;
-  delPartnerPro?: string;
-  onTime?: string;
-}
-
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
     shipDate: '04/03/2025',
-    deliveryDate: '04/04/2025',
-    deliveryTime: 'OFD ETA 10:17 AM',
-    etaDate: '04/04/2025',
+    deliveryDate: '',
+    deliveryTime: '',
+    etaDate: '',
     shipmentNumber: '811836865',
     bolRefs: '133200',
     shipper: 'SPR PACKAGING LLC',
@@ -42,9 +22,9 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '2',
     shipDate: '04/03/2025',
-    deliveryDate: '04/04/2025',
-    deliveryTime: 'OFD ETA 09:47 AM',
-    etaDate: '04/04/2025',
+    deliveryDate: '',
+    deliveryTime: '',
+    etaDate: '',
     shipmentNumber: '811836699',
     bolRefs: 'UNKNOWN',
     shipper: 'AMERICAN INFRASTRUCTURE',
@@ -61,9 +41,9 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '3',
     shipDate: '04/03/2025',
-    deliveryDate: '04/04/2025',
-    deliveryTime: 'OFD ETA 08:13 AM',
-    etaDate: '04/04/2025',
+    deliveryDate: '',
+    deliveryTime: '',
+    etaDate: '',
     shipmentNumber: '811836194',
     bolRefs: 'HU2579',
     shipper: 'KINGSTON BRASS INC',
@@ -80,9 +60,9 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '4',
     shipDate: '04/03/2025',
-    deliveryDate: '04/04/2025',
-    deliveryTime: 'OFD ETA 07:50 AM',
-    etaDate: '04/04/2025',
+    deliveryDate: '',
+    deliveryTime: '',
+    etaDate: '',
     shipmentNumber: '811836384',
     bolRefs: '3817567',
     shipper: 'ALEO LIGHTING',
@@ -99,9 +79,9 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '5',
     shipDate: '04/03/2025',
-    deliveryDate: '04/04/2025',
-    deliveryTime: 'OFD ETA 07:49 AM',
-    etaDate: '04/04/2025',
+    deliveryDate: '',
+    deliveryTime: '',
+    etaDate: '',
     shipmentNumber: '811836156',
     bolRefs: 'UNKNOWN',
     shipper: 'EPLASTICS',
@@ -115,29 +95,4 @@ export const shipmentData: ShipmentData[] = [
     delPartnerPro: '',
     onTime: 'Yes'
   }
-];
-
-export interface DateRangeOption {
-  value: string;
-  label: string;
-}
-
-export const dateRangeOptions: DateRangeOption[] = [
-  { value: 'last7', label: 'Last 7 Days' },
-  { value: 'last14', label: 'Last 14 Days' },
-  { value: 'last30', label: 'Last 30 Days' },
-  { value: 'custom', label: 'Custom Date Range' }
-];
-
-export interface ServiceTypeOption {
-  value: string;
-  label: string;
-}
-
-export const serviceTypeOptions: ServiceTypeOption[] = [
-  { value: 'all', label: 'All' },
-  { value: 'standard', label: 'Standard' },
-  { value: 'express', label: 'Express' },
-  { value: 'priority', label: 'Priority' },
-  { value: 'economy', label: 'Economy' }
 ];
