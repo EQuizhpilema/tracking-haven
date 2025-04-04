@@ -98,7 +98,7 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
     if (shipment.status.includes('Delivered')) {
       return (
         <div className="flex flex-col items-end">
-          <div className="text-sm mb-1">{statusText}</div>
+          <div className="text-sm">{statusText}</div>
           <CheckCircle className="text-tracking-success h-5 w-5" />
         </div>
       );
@@ -106,7 +106,7 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
       // For in-transit or other statuses
       return (
         <div className="flex flex-col items-end">
-          <div className="text-sm mb-1">{statusText}</div>
+          <div className="text-sm">{statusText}</div>
           <Truck className="text-tracking-blue h-5 w-5" />
         </div>
       );
@@ -129,3 +129,4 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
 };
 
 export default ShipmentDetails;
+
