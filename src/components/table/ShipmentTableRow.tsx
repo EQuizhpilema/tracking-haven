@@ -10,9 +10,12 @@ interface ShipmentTableRowProps {
 
 const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
   // Format the status to display "Delivery Exception" if it includes "Delayed"
-  const displayStatus = shipment.status.includes("Delayed") 
+  let displayStatus = shipment.status.includes("Delayed") 
     ? "Delivery Exception" 
     : shipment.status;
+  
+  // Remove date information from the status
+  displayStatus = displayStatus.replace(/ on \d{2}\/\d{2}\/\d{2}/, '');
 
   return (
     <TableRow key={shipment.id}>
