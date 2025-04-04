@@ -50,7 +50,7 @@ export const shipmentData: ShipmentData[] = [
     consigneeCity: 'WOODLAND',
     province: 'WA',
     zip: '98674',
-    status: 'Out For Delivery on 04/04/25',
+    status: 'Delivered on 04/04/25',
     puPartnerPro: '153753231',
     delPartnerPro: '',
     onTime: 'Yes'
@@ -68,7 +68,7 @@ export const shipmentData: ShipmentData[] = [
     consigneeCity: 'VANCOUVER',
     province: 'WA',
     zip: '98665',
-    status: 'Out For Delivery on 04/04/25',
+    status: 'Arrived at Dest Terminal on 04/04/25',
     puPartnerPro: '156717829',
     delPartnerPro: '',
     onTime: 'Yes'
@@ -86,7 +86,7 @@ export const shipmentData: ShipmentData[] = [
     consigneeCity: 'VANCOUVER',
     province: 'WA',
     zip: '98682',
-    status: 'Out For Delivery on 04/04/25',
+    status: 'In Transit - ETA 04/05/25',
     puPartnerPro: '165967332',
     delPartnerPro: '',
     onTime: 'Yes'
@@ -104,7 +104,7 @@ export const shipmentData: ShipmentData[] = [
     consigneeCity: 'CLACKAMAS',
     province: 'OR',
     zip: '97015',
-    status: 'Out For Delivery on 04/04/25',
+    status: 'Picked Up on 04/03/25',
     puPartnerPro: '155902182',
     delPartnerPro: '',
     onTime: 'Yes'
