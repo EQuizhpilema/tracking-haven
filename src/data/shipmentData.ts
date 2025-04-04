@@ -21,7 +21,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '1',
     shipDate: '04/03/2025',
-    deliveryDateTime: '',
+    deliveryDateTime: 'OFD ETA 10:17 AM',
     etaDate: '',
     shipmentNumber: '811836865',
     bolRefs: '133200',
@@ -39,7 +39,7 @@ export const shipmentData: ShipmentData[] = [
   {
     id: '2',
     shipDate: '04/03/2025',
-    deliveryDateTime: '',
+    deliveryDateTime: '04/04/2025 08:35 AM',
     etaDate: '',
     shipmentNumber: '811836699',
     bolRefs: 'UNKNOWN',

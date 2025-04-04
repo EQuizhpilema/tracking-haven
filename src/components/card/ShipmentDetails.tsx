@@ -13,7 +13,7 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
         {shipment.shipperCity} To {shipment.consigneeCity}, {shipment.province}
       </div>
       <div className="font-medium">
-        {shipment.deliveryTime} {shipment.etaDate}
+        {shipment.deliveryDateTime || shipment.etaDate}
       </div>
     </div>
   );
