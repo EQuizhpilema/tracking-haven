@@ -43,53 +43,52 @@ const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
 
   return (
     <div className="w-full overflow-auto animate-fade-in">
-      <Table className="tracking-table border-collapse">
+      <Table>
         <TableHeader>
-          <TableRow className="bg-gray-200">
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Ship Date</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Del Date</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Del Time</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">ETA Date</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Shipment Number</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">BOL/Ref #</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Shipper</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Shipper City</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Consignee</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Consignee City</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">State</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Zip</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Status</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">PU Partner Pro</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">Del Partner Pro</TableHead>
-            <TableHead className="font-medium text-center border border-gray-300 p-2">On Time</TableHead>
+          <TableRow>
+            <TableHead className="font-medium">Ship Date</TableHead>
+            <TableHead className="font-medium">Del Date</TableHead>
+            <TableHead className="font-medium">Del Time</TableHead>
+            <TableHead className="font-medium">ETA Date</TableHead>
+            <TableHead className="font-medium">Shipment Number</TableHead>
+            <TableHead className="font-medium">BOL/Ref #</TableHead>
+            <TableHead className="font-medium">Shipper</TableHead>
+            <TableHead className="font-medium">Shipper City</TableHead>
+            <TableHead className="font-medium">Consignee</TableHead>
+            <TableHead className="font-medium">Consignee City</TableHead>
+            <TableHead className="font-medium">State</TableHead>
+            <TableHead className="font-medium">Zip</TableHead>
+            <TableHead className="font-medium">Status</TableHead>
+            <TableHead className="font-medium">PU Partner Pro</TableHead>
+            <TableHead className="font-medium">Del Partner Pro</TableHead>
+            <TableHead className="font-medium">On Time</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {currentData.map((shipment) => (
             <TableRow 
               key={shipment.id}
-              className="even:bg-gray-100 hover:bg-gray-200 transition-colors"
             >
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.shipDate}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.deliveryDate}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.deliveryTime || '-'}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.etaDate}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center font-medium text-blue-600">
+              <TableCell>{shipment.shipDate}</TableCell>
+              <TableCell>{shipment.deliveryDate}</TableCell>
+              <TableCell>{shipment.deliveryTime || '-'}</TableCell>
+              <TableCell>{shipment.etaDate}</TableCell>
+              <TableCell className="font-medium text-blue-600">
                 <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
                   {shipment.shipmentNumber}
                 </a>
               </TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.bolRefs}</TableCell>
-              <TableCell className="border border-gray-300 p-2">{shipment.shipper}</TableCell>
-              <TableCell className="border border-gray-300 p-2">{shipment.shipperCity}</TableCell>
-              <TableCell className="border border-gray-300 p-2">{shipment.shipTo}</TableCell>
-              <TableCell className="border border-gray-300 p-2">{shipment.consigneeCity}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.province}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.zip}</TableCell>
-              <TableCell className="border border-gray-300 p-2">{shipment.status}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.puPartnerPro || '-'}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.delPartnerPro || '-'}</TableCell>
-              <TableCell className="border border-gray-300 p-2 text-center">{shipment.onTime || '-'}</TableCell>
+              <TableCell>{shipment.bolRefs}</TableCell>
+              <TableCell>{shipment.shipper}</TableCell>
+              <TableCell>{shipment.shipperCity}</TableCell>
+              <TableCell>{shipment.shipTo}</TableCell>
+              <TableCell>{shipment.consigneeCity}</TableCell>
+              <TableCell>{shipment.province}</TableCell>
+              <TableCell>{shipment.zip}</TableCell>
+              <TableCell>{shipment.status}</TableCell>
+              <TableCell>{shipment.puPartnerPro || '-'}</TableCell>
+              <TableCell>{shipment.delPartnerPro || '-'}</TableCell>
+              <TableCell>{shipment.onTime || '-'}</TableCell>
             </TableRow>
           ))}
         </TableBody>

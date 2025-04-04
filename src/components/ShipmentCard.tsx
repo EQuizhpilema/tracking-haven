@@ -10,7 +10,7 @@ interface ShipmentCardProps {
 
 const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
   return (
-    <div className="flex flex-col justify-center py-2">
+    <div className="flex flex-col justify-center py-4">
       <div className="mb-3">
         <div className="flex justify-between items-start">
           <div>
@@ -29,7 +29,7 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
           </div>
         </div>
       </div>
-      <div className="text-sm mb-3">
+      <div className="text-sm mb-4">
         <div className="mb-1">
           {shipment.shipperCity} To {shipment.consigneeCity}, {shipment.province}
         </div>
