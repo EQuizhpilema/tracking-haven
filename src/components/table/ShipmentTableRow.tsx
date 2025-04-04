@@ -9,6 +9,11 @@ interface ShipmentTableRowProps {
 }
 
 const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
+  // Format the status to display only "Delayed" if it includes "Delayed - Weather"
+  const displayStatus = shipment.status.includes("Delayed - Weather") 
+    ? "Delayed" 
+    : shipment.status;
+
   return (
     <TableRow key={shipment.id}>
       <TableCell>{shipment.shipDate}</TableCell>
@@ -26,7 +31,7 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
       <TableCell>{shipment.consigneeCity}</TableCell>
       <TableCell>{shipment.province}</TableCell>
       <TableCell>{shipment.zip}</TableCell>
-      <TableCell>{shipment.status}</TableCell>
+      <TableCell>{displayStatus}</TableCell>
       <TableCell>{shipment.puPartnerPro || '-'}</TableCell>
       <TableCell>{shipment.delPartnerPro || '-'}</TableCell>
       <TableCell>
