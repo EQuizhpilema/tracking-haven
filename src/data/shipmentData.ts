@@ -1,21 +1,4 @@
-export interface ShipmentData {
-  id: string;
-  shipDate: string;
-  deliveryDateTime?: string; // Combined delivery date and time
-  etaDate: string;
-  shipmentNumber: string;
-  bolRefs: string;
-  shipper: string;
-  shipperCity: string;
-  shipTo: string;
-  consigneeCity: string;
-  province: string;
-  zip: string;
-  status: string;
-  puPartnerPro?: string;
-  delPartnerPro?: string;
-  onTime?: string;
-}
+import { ShipmentData } from './shipmentData';
 
 export const shipmentData: ShipmentData[] = [
   {
