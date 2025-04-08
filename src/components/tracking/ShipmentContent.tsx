@@ -2,7 +2,7 @@
 import React from 'react';
 import ShipmentTable from '../ShipmentTable';
 import ShipmentCard from '../ShipmentCard';
-import { ShipmentData } from '../../data/shipmentData';
+import { ShipmentData } from '@/data/shipmentData';
 
 interface ShipmentContentProps {
   data: ShipmentData[];

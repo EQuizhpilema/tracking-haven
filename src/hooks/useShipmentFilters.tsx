@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { shipmentData } from '../data/shipmentData';
+import { shipmentData, ShipmentData } from '@/data/shipmentData';
 import { toast } from "@/components/ui/use-toast";
 
 export const useShipmentFilters = () => {
@@ -39,7 +39,7 @@ export const useShipmentFilters = () => {
   };
 
   // Apply status filters to data
-  const applyFilters = (data: typeof shipmentData) => {
+  const applyFilters = (data: ShipmentData[]) => {
     return data.filter(shipment => {
       // Status filters
       const isDelivered = shipment.status.includes('Delivered');
