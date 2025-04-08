@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipment Header Example</title>
+  <!-- MDB Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .text-tracking-success { color: #28a745; }
+    .text-tracking-blue { color: #007bff; }
+    .shipment-link { color: #007bff; }
+    .shipment-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Shipment Tracking</h1>
+    
+    <!-- Shipment Header Container -->
+    <div id="shipment-header"></div>
+    
+    <!-- More shipment information would go here -->
+  </div>
+
+  <!-- MDB Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  <!-- Custom Component JS -->
+  <script src="shipmentHeader.js"></script>
+  
+  <script>
+    // Sample shipment data
+    const shipment = {
+      shipper: "Global Shipping Inc.",
+      shipmentNumber: "SHP-12345678",
+      bolRefs: "987654",
+      status: "Delivered on 04/02/25"
+    };
+    
+    // Initialize the component when the DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      initShipmentHeader(shipment, 'shipment-header');
+      
+      // Example of how to update the component with new data
+      document.getElementById('update-btn').addEventListener('click', function() {
+        const updatedShipment = {
+          shipper: "Express Logistics",
+          shipmentNumber: "SHP-87654321",
+          bolRefs: "123456",
+          status: "In Transit - Chicago"
+        };
+        initShipmentHeader(updatedShipment, 'shipment-header');
+      });
+    });
+  </script>
+  
+  <!-- Demo button to update the component -->
+  <div class="container mt-3">
+    <button id="update-btn" class="btn btn-primary">Update Shipment Data</button>
+  </div>
+</body>
+</html>

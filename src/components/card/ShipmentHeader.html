@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipment Header</title>
+  <!-- MDB Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .text-tracking-success { color: #28a745; }
+    .text-tracking-blue { color: #007bff; }
+    .shipment-link { color: #007bff; }
+    .shipment-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Shipment Header Component -->
+    <div class="mb-3 shipment-header">
+      <div class="d-flex justify-content-between align-items-start pe-4">
+        <div>
+          <h3 class="fw-bold shipper-name"></h3>
+          <div class="shipment-link">
+            <a href="#" class="shipment-number"></a>
+          </div>
+          <div class="text-muted small bol-refs"></div>
+        </div>
+        <div class="d-flex flex-column align-items-end">
+          <span class="fs-5 fw-semibold text-dark status-text"></span>
+          <div class="mt-1 status-icon">
+            <!-- Icons will be inserted by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MDB Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Sample shipment data (in a real app, this would come from your backend)
+    const shipmentData = {
+      shipper: "Global Shipping Inc.",
+      shipmentNumber: "SHP-12345678",
+      bolRefs: "BOL/Ref# 987654",
+      status: "Delivered on 04/02/25"
+    };
+
+    // Function to extract just the status without the date
+    function getStatusText(status) {
+      // Common status patterns to extract
+      const statusPatterns = [
+        'Delivered',
+        'Out For Delivery',
+        'In Transit',
+        'Arrived at Dest Terminal',
+        'Picked Up',
+        'Delayed'
+      ];
+      
+      // Find the first status pattern that matches
+      for (const pattern of statusPatterns) {
+        if (status.includes(pattern)) {
+          return pattern;
+        }
+      }
+      
+      // If no pattern matches, return the first part of the status (before "on" or "-")
+      if (status.includes(' on ')) {
+        return status.split(' on ')[0].trim();
+      }
+      
+      if (status.includes(' - ')) {
+        return status.split(' - ')[0].trim();
+      }
+      
+      return status;
+    }
+
+    // Initialize the component
+    function initShipmentHeader(shipment) {
+      // Set text content
+      document.querySelector('.shipper-name').textContent = shipment.shipper;
+      document.querySelector('.shipment-number').textContent = shipment.shipmentNumber;
+      document.querySelector('.shipment-number').href = `#${shipment.shipmentNumber}`;
+      document.querySelector('.bol-refs').textContent = `BOL/Ref# ${shipment.bolRefs}`;
+      
+      // Set status text
+      const statusText = getStatusText(shipment.status);
+      document.querySelector('.status-text').textContent = statusText;
+      
+      // Set status icon
+      const isDelivered = shipment.status.includes('Delivered');
+      const iconContainer = document.querySelector('.status-icon');
+      
+      if (isDelivered) {
+        iconContainer.innerHTML = `<i class="fas fa-check-circle fs-4 text-tracking-success"></i>`;
+      } else {
+        iconContainer.innerHTML = `<i class="fas fa-truck fs-4 text-tracking-blue"></i>`;
+      }
+    }
+
+    // Initialize with sample data (in a real app, call this when data is loaded)
+    document.addEventListener('DOMContentLoaded', function() {
+      initShipmentHeader(shipmentData);
+    });
+  </script>
+</body>
+</html>
