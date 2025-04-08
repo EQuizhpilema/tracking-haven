@@ -18,38 +18,77 @@ const ShipmentTracking: React.FC = () => {
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
 
+  // Filter states
+  const [deliveredToggle, setDeliveredToggle] = useState(true);
+  const [undeliveredToggle, setUndeliveredToggle] = useState(true);
+  const [pickupsToggle, setPickupsToggle] = useState(true);
+  const [shipperToggle, setShipperToggle] = useState(true);
+  const [consigneeToggle, setConsigneeToggle] = useState(true);
+  const [billToToggle, setBillToToggle] = useState(true);
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
     
     if (query.trim() === '') {
-      setFilteredData(shipmentData);
+      setFilteredData(applyFilters(shipmentData));
       return;
     }
     
-    const filtered = shipmentData.filter(shipment => 
+    const searchFiltered = shipmentData.filter(shipment => 
       shipment.shipmentNumber.toLowerCase().includes(query.toLowerCase()) ||
       shipment.bolRefs.toLowerCase().includes(query.toLowerCase()) ||
       shipment.shipper.toLowerCase().includes(query.toLowerCase()) ||
       shipment.shipTo.toLowerCase().includes(query.toLowerCase())
     );
     
-    setFilteredData(filtered);
+    setFilteredData(applyFilters(searchFiltered));
+  };
+
+  // Apply all active filters to the data
+  const applyFilters = (data: typeof shipmentData) => {
+    return data.filter(shipment => {
+      // Status filters
+      const isDelivered = shipment.status.includes('Delivered');
+      const isPickup = shipment.status.includes('Picked Up');
+      
+      if (!deliveredToggle && isDelivered) return false;
+      if (!undeliveredToggle && !isDelivered && !isPickup) return false;
+      if (!pickupsToggle && isPickup) return false;
+      
+      return true;
+    });
   };
 
   const handleApplyFilter = () => {
+    setFilteredData(applyFilters(shipmentData.filter(shipment => 
+      searchQuery.trim() === '' ? true : 
+      shipment.shipmentNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      shipment.bolRefs.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      shipment.shipper.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      shipment.shipTo.toLowerCase().includes(searchQuery.toLowerCase())
+    )));
+    
     toast({
       title: "Filters Applied",
       description: "Your filter settings have been applied to the data.",
     });
+    
     if (isMobile) {
       setIsFilterDrawerOpen(false);
     }
-    // In a real app, this would implement actual filtering logic
   };
 
   const handleResetFilter = () => {
+    setDeliveredToggle(true);
+    setUndeliveredToggle(true);
+    setPickupsToggle(true);
+    setShipperToggle(true);
+    setConsigneeToggle(true);
+    setBillToToggle(true);
+    setSearchQuery('');
     setFilteredData(shipmentData);
+    
     toast({
       title: "Filters Reset",
       description: "All filters have been reset to default values.",
@@ -78,6 +117,18 @@ const ShipmentTracking: React.FC = () => {
             <FilterSidebar 
               onApplyFilter={handleApplyFilter}
               onResetFilter={handleResetFilter}
+              deliveredToggle={deliveredToggle}
+              undeliveredToggle={undeliveredToggle}
+              pickupsToggle={pickupsToggle}
+              onDeliveredToggle={() => setDeliveredToggle(!deliveredToggle)}
+              onUndeliveredToggle={() => setUndeliveredToggle(!undeliveredToggle)}
+              onPickupsToggle={() => setPickupsToggle(!pickupsToggle)}
+              shipperToggle={shipperToggle}
+              consigneeToggle={consigneeToggle}
+              billToToggle={billToToggle}
+              onShipperToggle={() => setShipperToggle(!shipperToggle)}
+              onConsigneeToggle={() => setConsigneeToggle(!consigneeToggle)}
+              onBillToToggle={() => setBillToToggle(!billToToggle)}
             />
           </aside>
         )}
@@ -102,6 +153,18 @@ const ShipmentTracking: React.FC = () => {
                     <FilterSidebar 
                       onApplyFilter={handleApplyFilter}
                       onResetFilter={handleResetFilter}
+                      deliveredToggle={deliveredToggle}
+                      undeliveredToggle={undeliveredToggle}
+                      pickupsToggle={pickupsToggle}
+                      onDeliveredToggle={() => setDeliveredToggle(!deliveredToggle)}
+                      onUndeliveredToggle={() => setUndeliveredToggle(!undeliveredToggle)}
+                      onPickupsToggle={() => setPickupsToggle(!pickupsToggle)}
+                      shipperToggle={shipperToggle}
+                      consigneeToggle={consigneeToggle}
+                      billToToggle={billToToggle}
+                      onShipperToggle={() => setShipperToggle(!shipperToggle)}
+                      onConsigneeToggle={() => setConsigneeToggle(!consigneeToggle)}
+                      onBillToToggle={() => setBillToToggle(!billToToggle)}
                     />
                   </div>
                 </DrawerContent>
