@@ -41,14 +41,16 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
                 </TooltipContent>
               </Tooltip>
             </div>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={deliveredToggle} 
-                onChange={onDeliveredToggle} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+            <div className="flex items-center">
+              <label className="toggle-switch ml-auto">
+                <input 
+                  type="checkbox" 
+                  checked={deliveredToggle} 
+                  onChange={onDeliveredToggle} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -65,14 +67,16 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
                 </TooltipContent>
               </Tooltip>
             </div>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={undeliveredToggle} 
-                onChange={onUndeliveredToggle} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+            <div className="flex items-center">
+              <label className="toggle-switch ml-auto">
+                <input 
+                  type="checkbox" 
+                  checked={undeliveredToggle} 
+                  onChange={onUndeliveredToggle} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -89,14 +93,16 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
                 </TooltipContent>
               </Tooltip>
             </div>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={pickupsToggle} 
-                onChange={onPickupsToggle} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+            <div className="flex items-center">
+              <label className="toggle-switch ml-auto">
+                <input 
+                  type="checkbox" 
+                  checked={pickupsToggle} 
+                  onChange={onPickupsToggle} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
         </div>
       </TooltipProvider>
@@ -105,3 +111,4 @@ const ShipmentStatusFilter: React.FC<ShipmentStatusFilterProps> = ({
 };
 
 export default ShipmentStatusFilter;
+

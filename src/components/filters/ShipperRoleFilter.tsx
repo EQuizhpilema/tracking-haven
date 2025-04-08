@@ -41,14 +41,16 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
                 </TooltipContent>
               </Tooltip>
             </div>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={shipperToggle} 
-                onChange={onShipperToggle} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+            <div className="flex items-center">
+              <label className="toggle-switch ml-auto">
+                <input 
+                  type="checkbox" 
+                  checked={shipperToggle} 
+                  onChange={onShipperToggle} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -65,14 +67,16 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
                 </TooltipContent>
               </Tooltip>
             </div>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={consigneeToggle} 
-                onChange={onConsigneeToggle} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+            <div className="flex items-center">
+              <label className="toggle-switch ml-auto">
+                <input 
+                  type="checkbox" 
+                  checked={consigneeToggle} 
+                  onChange={onConsigneeToggle} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -89,14 +93,16 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
                 </TooltipContent>
               </Tooltip>
             </div>
-            <label className="toggle-switch">
-              <input 
-                type="checkbox" 
-                checked={billToPartyToggle} 
-                onChange={onBillToPartyToggle} 
-              />
-              <span className="toggle-slider"></span>
-            </label>
+            <div className="flex items-center">
+              <label className="toggle-switch ml-auto">
+                <input 
+                  type="checkbox" 
+                  checked={billToPartyToggle} 
+                  onChange={onBillToPartyToggle} 
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
           </div>
         </div>
       </TooltipProvider>
@@ -105,3 +111,4 @@ const ShipperRoleFilter: React.FC<ShipperRoleFilterProps> = ({
 };
 
 export default ShipperRoleFilter;
+
