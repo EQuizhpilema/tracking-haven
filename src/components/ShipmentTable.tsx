@@ -6,7 +6,7 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { ShipmentData } from '../data/shipmentData';
+import { ShipmentData } from '@/data/shipmentData';
 import SortableHeader from './table/SortableHeader';
 import TablePagination from './table/TablePagination';
 import ShipmentTableRow from './table/ShipmentTableRow';
@@ -17,6 +17,7 @@ interface ShipmentTableProps {
 }
 
 const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
+  console.log('ShipmentTable received data:', data); // Add logging to debug data
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   
@@ -51,9 +52,17 @@ const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {currentData.map((shipment) => (
-              <ShipmentTableRow key={shipment.id} shipment={shipment} />
-            ))}
+            {currentData.length > 0 ? (
+              currentData.map((shipment) => (
+                <ShipmentTableRow key={shipment.id} shipment={shipment} />
+              ))
+            ) : (
+              <TableRow>
+                <td colSpan={15} className="text-center py-4">
+                  No shipments found matching your criteria
+                </td>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>

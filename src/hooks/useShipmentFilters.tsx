@@ -16,7 +16,7 @@ export const useShipmentFilters = () => {
   const [billToToggle, setBillToToggle] = useState(true);
   
   // Result state
-  const [filteredData, setFilteredData] = useState(shipmentData);
+  const [filteredData, setFilteredData] = useState<ShipmentData[]>(shipmentData);
 
   // Handle search input changes
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

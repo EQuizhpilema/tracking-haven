@@ -10,6 +10,8 @@ interface ShipmentContentProps {
 }
 
 const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => {
+  console.log('ShipmentContent data:', data); // Add logging to debug data
+  
   return (
     <>
       {isMobile ? (
