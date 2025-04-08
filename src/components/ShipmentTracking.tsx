@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -128,7 +127,7 @@ const ShipmentTracking: React.FC = () => {
               billToToggle={billToToggle}
               onShipperToggle={() => setShipperToggle(!shipperToggle)}
               onConsigneeToggle={() => setConsigneeToggle(!consigneeToggle)}
-              onBillToToggle={() => setBillToToggle(!billToToggle)}
+              onBillToPartyToggle={() => setBillToToggle(!billToToggle)}
             />
           </aside>
         )}
@@ -164,7 +163,7 @@ const ShipmentTracking: React.FC = () => {
                       billToToggle={billToToggle}
                       onShipperToggle={() => setShipperToggle(!shipperToggle)}
                       onConsigneeToggle={() => setConsigneeToggle(!consigneeToggle)}
-                      onBillToToggle={() => setBillToToggle(!billToToggle)}
+                      onBillToPartyToggle={() => setBillToToggle(!billToToggle)}
                     />
                   </div>
                 </DrawerContent>
