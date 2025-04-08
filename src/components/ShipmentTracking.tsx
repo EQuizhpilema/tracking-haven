@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useShipmentFilters } from '@/hooks/useShipmentFilters';
 import FilterSidebar from './FilterSidebar';
 import ShipmentTrackingHeader from './tracking/ShipmentTrackingHeader';
 import ShipmentContent from './tracking/ShipmentContent';
 import MobileFilterDrawer from './tracking/MobileFilterDrawer';
+import { shipmentData } from '@/data/shipmentData';
 
 const ShipmentTracking: React.FC = () => {
   const [showFilters, setShowFilters] = useState(true);
@@ -31,6 +32,11 @@ const ShipmentTracking: React.FC = () => {
     onConsigneeToggle,
     onBillToPartyToggle
   } = useShipmentFilters();
+
+  useEffect(() => {
+    console.log('ShipmentTracking: Initial data count:', shipmentData.length);
+    console.log('ShipmentTracking: Filtered data count:', filteredData.length);
+  }, [filteredData]);
 
   // Common filter props used in multiple places
   const filterProps = {
@@ -92,6 +98,11 @@ const ShipmentTracking: React.FC = () => {
           
           {/* Table or Card View based on screen size */}
           <ShipmentContent data={filteredData} isMobile={isMobile} />
+          
+          {/* Debug information - remove in production */}
+          <div className="mt-4 text-xs text-gray-400 border-t pt-2">
+            Filtered shipments: {filteredData.length}
+          </div>
         </main>
       </div>
     </div>

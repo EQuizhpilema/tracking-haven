@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { shipmentData, ShipmentData } from '@/data/shipmentData';
 import { toast } from "@/components/ui/use-toast";
 
@@ -16,7 +16,13 @@ export const useShipmentFilters = () => {
   const [billToToggle, setBillToToggle] = useState(true);
   
   // Result state
-  const [filteredData, setFilteredData] = useState<ShipmentData[]>(shipmentData);
+  const [filteredData, setFilteredData] = useState<ShipmentData[]>([]);
+
+  // Initialize data on component mount
+  useEffect(() => {
+    console.log('useShipmentFilters: Initializing with data count:', shipmentData.length);
+    setFilteredData(shipmentData);
+  }, []);
 
   // Handle search input changes
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,13 +61,16 @@ export const useShipmentFilters = () => {
 
   // Handle applying all filters
   const handleApplyFilter = () => {
-    setFilteredData(applyFilters(shipmentData.filter(shipment => 
+    const filtered = applyFilters(shipmentData.filter(shipment => 
       searchQuery.trim() === '' ? true : 
       shipment.shipmentNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
       shipment.bolRefs.toLowerCase().includes(searchQuery.toLowerCase()) ||
       shipment.shipper.toLowerCase().includes(searchQuery.toLowerCase()) ||
       shipment.shipTo.toLowerCase().includes(searchQuery.toLowerCase())
-    )));
+    ));
+    
+    console.log('Applying filters, filtered count:', filtered.length);
+    setFilteredData(filtered);
     
     toast({
       title: "Filters Applied",
