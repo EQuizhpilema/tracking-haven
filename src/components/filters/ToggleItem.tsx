@@ -19,7 +19,7 @@ const ToggleItem: React.FC<ToggleItemProps> = ({
   onToggle
 }) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       <div className="flex items-center">
         <span>{label}</span>
         <TooltipProvider>
@@ -36,7 +36,7 @@ const ToggleItem: React.FC<ToggleItemProps> = ({
           </Tooltip>
         </TooltipProvider>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center ml-auto">
         <Switch 
           checked={isToggled} 
           onCheckedChange={onToggle}
