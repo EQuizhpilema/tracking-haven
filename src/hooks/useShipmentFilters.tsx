@@ -15,18 +15,19 @@ export const useShipmentFilters = () => {
   const [consigneeToggle, setConsigneeToggle] = useState(true);
   const [billToToggle, setBillToToggle] = useState(true);
   
+  // Force a hard copy of the data to ensure it's available
+  const initialData = [...shipmentData];
+  
   // Result state - initialize with the full dataset
-  const [filteredData, setFilteredData] = useState<ShipmentData[]>(shipmentData);
+  const [filteredData, setFilteredData] = useState<ShipmentData[]>(initialData);
 
   // Initialize data on component mount
   useEffect(() => {
-    console.log('useShipmentFilters: Initial dataset:', shipmentData);
-    console.log('useShipmentFilters: Initializing with data count:', shipmentData.length);
-    console.log('useShipmentFilters: First item:', shipmentData[0]);
+    console.log('useShipmentFilters: Initial dataset count:', initialData.length);
     
-    // Ensure we're working with the correct data format
-    if (shipmentData.length > 0) {
-      setFilteredData(shipmentData);
+    if (initialData.length > 0) {
+      console.log('useShipmentFilters: First item:', initialData[0]);
+      setFilteredData(initialData);
     } else {
       console.error('useShipmentFilters: No shipment data available to initialize filters');
     }
@@ -38,11 +39,11 @@ export const useShipmentFilters = () => {
     setSearchQuery(query);
     
     if (query.trim() === '') {
-      setFilteredData(applyFilters(shipmentData));
+      setFilteredData(applyFilters(initialData));
       return;
     }
     
-    const searchFiltered = shipmentData.filter(shipment => 
+    const searchFiltered = initialData.filter(shipment => 
       (shipment.shipmentNumber && shipment.shipmentNumber.toLowerCase().includes(query.toLowerCase())) ||
       (shipment.bolRefs && shipment.bolRefs.toLowerCase().includes(query.toLowerCase())) ||
       (shipment.shipper && shipment.shipper.toLowerCase().includes(query.toLowerCase())) ||
@@ -69,7 +70,7 @@ export const useShipmentFilters = () => {
 
   // Handle applying all filters
   const handleApplyFilter = () => {
-    const filtered = applyFilters(shipmentData.filter(shipment => 
+    const filtered = applyFilters(initialData.filter(shipment => 
       searchQuery.trim() === '' ? true : 
       (shipment.shipmentNumber && shipment.shipmentNumber.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (shipment.bolRefs && shipment.bolRefs.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -95,11 +96,11 @@ export const useShipmentFilters = () => {
     setConsigneeToggle(true);
     setBillToToggle(true);
     setSearchQuery('');
-    setFilteredData(shipmentData);
+    setFilteredData(initialData);
     
     toast({
       title: "Filters Reset",
-      description: `All filters have been reset to default values. Showing ${shipmentData.length} shipments.`,
+      description: `All filters have been reset to default values. Showing ${initialData.length} shipments.`,
     });
   };
 

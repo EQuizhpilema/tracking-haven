@@ -13,8 +13,8 @@ const ShipmentTracking: React.FC = () => {
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Ensure we have data by using the imported shipmentData directly
-  const initialData = shipmentData;
+  // Initialize with hard-coded data - critical for ensuring data is available
+  const initialData = [...shipmentData];
   
   console.log('ShipmentTracking: Initial data loaded:', initialData.length, 'items');
   console.log('ShipmentTracking: First item sample:', initialData[0]);
@@ -70,6 +70,9 @@ const ShipmentTracking: React.FC = () => {
     onBillToPartyToggle
   };
 
+  // Guarantee that we always have data to display, even if filters remove everything
+  const displayData = filteredData.length > 0 ? filteredData : initialData;
+
   return (
     <div className="min-h-screen bg-white animate-fade-in">
       {/* Header */}
@@ -107,7 +110,7 @@ const ShipmentTracking: React.FC = () => {
           
           {/* Table or Card View based on screen size */}
           <ShipmentContent 
-            data={filteredData.length > 0 ? filteredData : initialData} 
+            data={displayData}
             isMobile={isMobile} 
           />
           

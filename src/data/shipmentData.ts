@@ -1,6 +1,6 @@
 
 export interface ShipmentData {
-  id: string;
+  id: string | number;
   shipDate: string;
   deliveryDateTime: string;
   etaDate: string;
@@ -18,6 +18,7 @@ export interface ShipmentData {
   onTime: string;
 }
 
+// Export hardcoded data directly to ensure it's available
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
@@ -126,5 +127,42 @@ export const shipmentData: ShipmentData[] = [
     puPartnerPro: '165971234',
     delPartnerPro: '183456789',
     onTime: 'No'
+  },
+  // Adding a few more sample items from js/shipmentData.js for more data variety
+  {
+    id: '7',
+    shipDate: '04/01/25',
+    deliveryDateTime: '04/04/25 14:30',
+    etaDate: '04/04/25',
+    shipmentNumber: 'SHP-12345678',
+    bolRefs: 'BOL1234567',
+    shipper: 'TechGlobal Inc.',
+    shipperCity: 'San Francisco',
+    shipTo: 'ElectroFuture Corp',
+    consigneeCity: 'Atlanta',
+    province: 'GA',
+    zip: '30301',
+    status: 'Delivered on 04/04/25',
+    puPartnerPro: 'PU123456',
+    delPartnerPro: 'DEL789012',
+    onTime: 'Yes'
+  },
+  {
+    id: '8',
+    shipDate: '04/02/25',
+    deliveryDateTime: '04/06/25 10:15',
+    etaDate: '04/06/25',
+    shipmentNumber: 'SHP-23456789',
+    bolRefs: 'BOL2345678',
+    shipper: 'BioMed Solutions',
+    shipperCity: 'Boston',
+    shipTo: 'Hospitech Industries',
+    consigneeCity: 'Chicago',
+    province: 'IL',
+    zip: '60601',
+    status: 'In Transit - Memphis',
+    puPartnerPro: 'PU234567',
+    delPartnerPro: '',
+    onTime: 'Yes'
   }
 ];
