@@ -21,6 +21,11 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
   const deliveryTime = shipment.deliveryDateTime?.includes(' ') 
     ? shipment.deliveryDateTime.split(' ').slice(1).join(' ')
     : '';
+    
+  // Format for display with special handling for "Completed" status
+  const formattedStatus = displayStatus.includes('Completed')
+    ? displayStatus.toUpperCase()
+    : displayStatus;
 
   return (
     <TableRow className="h-[36px]">
@@ -40,7 +45,7 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
       <TableCell className="p-2 whitespace-nowrap">{shipment.consigneeCity}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.province}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.zip}</TableCell>
-      <TableCell className="p-2 whitespace-nowrap">{displayStatus}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{formattedStatus}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.puPartnerPro || '-'}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.delPartnerPro || '-'}</TableCell>
       <TableCell className="p-2 whitespace-nowrap text-center">
