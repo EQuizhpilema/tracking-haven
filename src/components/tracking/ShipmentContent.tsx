@@ -38,31 +38,56 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
   return (
     <>
       {isMobile ? (
-        <div className="space-y-2">
+        <div className="space-y-0 text-sm">
+          {/* Mobile header row */}
+          <div className="grid grid-cols-4 gap-1 bg-gray-100 py-2 px-1 font-semibold text-xs sticky top-0 z-10">
+            <div>Ship Date</div>
+            <div>Shipment #</div>
+            <div>Status</div>
+            <div>On Time</div>
+          </div>
+          
           {hasData ? (
             displayData.map((shipment) => (
-              <div key={shipment.id} className="py-3">
-                <div className="font-medium text-blue-600">
-                  <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
-                    {shipment.shipmentNumber}
-                  </a>
+              <React.Fragment key={shipment.id}>
+                {/* Mobile data row */}
+                <div className="grid grid-cols-4 gap-1 py-2 px-1 text-xs hover:bg-gray-50">
+                  <div>{shipment.shipDate}</div>
+                  <div className="text-blue-600">
+                    <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
+                      {shipment.shipmentNumber.substring(0, 8)}
+                    </a>
+                  </div>
+                  <div>{shipment.status.replace(/ on \d{2}\/\d{2}\/\d{2}/, '')}</div>
+                  <div className="text-center">
+                    {shipment.onTime === 'Yes' ? (
+                      <span className="text-tracking-success">✓</span>
+                    ) : shipment.onTime === 'No' ? (
+                      <span className="text-tracking-danger">✗</span>
+                    ) : (
+                      '-'
+                    )}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-x-2 text-sm mt-1">
+                
+                {/* Detail row that expands on tap (optional) */}
+                <div className="grid grid-cols-2 gap-x-2 px-1 pb-2 text-xs text-gray-700">
                   <div>
-                    <span className="text-gray-500">Shipper:</span> {shipment.shipper}
+                    <span className="font-medium">Shipper:</span> {shipment.shipper}
                   </div>
                   <div>
-                    <span className="text-gray-500">Consignee:</span> {shipment.shipTo}
+                    <span className="font-medium">Consignee:</span> {shipment.shipTo}
                   </div>
                   <div>
-                    <span className="text-gray-500">Status:</span> {shipment.status.replace(/ on \d{2}\/\d{2}\/\d{2}/, '')}
+                    <span className="font-medium">ETA:</span> {shipment.etaDate}
                   </div>
                   <div>
-                    <span className="text-gray-500">Delivery:</span> {shipment.deliveryDateTime || 'TBD'}
+                    <span className="font-medium">Del:</span> {shipment.deliveryDateTime || 'TBD'}
                   </div>
                 </div>
-                <Separator className="mt-3 bg-gray-200" />
-              </div>
+                
+                <Separator className="my-0 bg-gray-200" />
+              </React.Fragment>
             ))
           ) : (
             <div className="text-center py-8 border rounded-lg">
