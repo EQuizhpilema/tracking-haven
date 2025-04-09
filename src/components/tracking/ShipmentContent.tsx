@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ShipmentTable from '../ShipmentTable';
 import ShipmentCard from '../ShipmentCard';
 import { ShipmentData, getShipmentData } from '@/data/shipmentData';
+import { Separator } from "@/components/ui/separator";
 
 interface ShipmentContentProps {
   data: ShipmentData[];
@@ -38,10 +39,31 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
   return (
     <>
       {isMobile ? (
-        <div className="space-y-4">
+        <div className="space-y-2">
           {hasData ? (
             displayData.map((shipment) => (
-              <ShipmentCard key={shipment.id} shipment={shipment} />
+              <div key={shipment.id} className="py-3">
+                <div className="font-medium text-blue-600">
+                  <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
+                    {shipment.shipmentNumber}
+                  </a>
+                </div>
+                <div className="grid grid-cols-2 gap-x-2 text-sm mt-1">
+                  <div>
+                    <span className="text-gray-500">Shipper:</span> {shipment.shipper}
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Consignee:</span> {shipment.shipTo}
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Status:</span> {shipment.status.replace(/ on \d{2}\/\d{2}\/\d{2}/, '')}
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Delivery:</span> {shipment.deliveryDateTime || 'TBD'}
+                  </div>
+                </div>
+                <Separator className="mt-3 bg-gray-200" />
+              </div>
             ))
           ) : (
             <div className="text-center py-8 border rounded-lg">
