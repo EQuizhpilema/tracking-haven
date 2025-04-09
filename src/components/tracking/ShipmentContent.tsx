@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ShipmentData, getShipmentData } from '@/data/shipmentData';
 import { CheckCircle, XCircle } from 'lucide-react';
+import ShipmentTable from '@/components/ShipmentTable';
 
 interface ShipmentContentProps {
   data: ShipmentData[];
@@ -27,7 +28,6 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
   
   const hasData = displayData && Array.isArray(displayData) && displayData.length > 0;
   
-  // Mobile view rendering
   const renderMobileTable = () => {
     if (!hasData) {
       return (
