@@ -15,6 +15,7 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
   
   useEffect(() => {
     console.log('ShipmentContent mounting with data:', data);
+    console.log('Is Mobile view:', isMobile);
     
     if (Array.isArray(data) && data.length > 0) {
       console.log('ShipmentContent: Valid data received, using it');
@@ -40,7 +41,7 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
     }
 
     return (
-      <Table>
+      <Table className="border-collapse">
         <TableHeader>
           <TableRow>
             <TableHead>Shipment</TableHead>
@@ -53,31 +54,33 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
             // Determine if the shipment has been delivered
             const isDelivered = shipment.status.includes('Delivered');
             
+            // Format route information (From City, State to City, State)
+            const routeInfo = `${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`;
+            
             // Format delivery information based on status
             const deliveryInfo = isDelivered 
               ? `Actual Delivery ${formatDeliveryDate(shipment.deliveryDateTime)}` 
               : `Estimated Delivery ${formatEstimatedDate(shipment.etaDate)}`;
             
-            // Format route information (From City, State to City, State)
-            const routeInfo = `${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`;
-            
             return (
               <TableRow key={shipment.id}>
-                <TableCell className="font-medium">
-                  <div>{shipment.shipmentNumber}</div>
+                <TableCell className="font-medium p-3">
+                  <div className="text-blue-600">{shipment.shipmentNumber}</div>
                   <div className="text-xs text-gray-500">{shipment.bolRefs}</div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="p-3">
                   <div className="text-sm">{routeInfo}</div>
                   <div className="text-xs text-gray-500">{deliveryInfo}</div>
                 </TableCell>
-                <TableCell className="text-right">
-                  <div>{formatStatus(shipment.status)}</div>
-                  {shipment.onTime === 'Yes' ? (
-                    <CheckCircle className="h-4 w-4 text-tracking-success inline-block ml-1" />
-                  ) : shipment.onTime === 'No' ? (
-                    <XCircle className="h-4 w-4 text-tracking-danger inline-block ml-1" />
-                  ) : null}
+                <TableCell className="text-right p-3">
+                  <div className="flex items-center justify-end">
+                    <span>{formatStatus(shipment.status)}</span>
+                    {shipment.onTime === 'Yes' ? (
+                      <CheckCircle className="h-4 w-4 text-green-500 ml-1" />
+                    ) : shipment.onTime === 'No' ? (
+                      <XCircle className="h-4 w-4 text-red-500 ml-1" />
+                    ) : null}
+                  </div>
                 </TableCell>
               </TableRow>
             );
@@ -143,7 +146,7 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
   };
 
   return (
-    <>
+    <div className="w-full">
       {isMobile ? (
         <div className="space-y-0 text-sm">
           {renderMobileTable()}
@@ -151,7 +154,11 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
       ) : (
         <ShipmentTable data={hasData ? displayData : []} />
       )}
-    </>
+      
+      <div className="mt-4 text-xs text-gray-400">
+        View mode: {isMobile ? 'Mobile' : 'Desktop'} | Total shipments: {displayData.length}
+      </div>
+    </div>
   );
 };
 
