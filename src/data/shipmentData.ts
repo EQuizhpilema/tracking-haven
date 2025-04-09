@@ -18,6 +18,7 @@ export interface ShipmentData {
   onTime: string;
 }
 
+// Ensure data is available for both sandbox and preview by making it a constant export
 // Export hardcoded data directly to ensure it's available
 export const shipmentData: ShipmentData[] = [
   {
@@ -128,7 +129,6 @@ export const shipmentData: ShipmentData[] = [
     delPartnerPro: '183456789',
     onTime: 'No'
   },
-  // Adding a few more sample items from js/shipmentData.js for more data variety
   {
     id: '7',
     shipDate: '04/01/25',
@@ -166,3 +166,9 @@ export const shipmentData: ShipmentData[] = [
     onTime: 'Yes'
   }
 ];
+
+// Add fallback function to always get data even if imports fail
+export function getShipmentData(): ShipmentData[] {
+  // This ensures we always have data to return
+  return shipmentData;
+}

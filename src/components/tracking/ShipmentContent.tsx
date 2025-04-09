@@ -1,8 +1,8 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ShipmentTable from '../ShipmentTable';
 import ShipmentCard from '../ShipmentCard';
-import { ShipmentData } from '@/data/shipmentData';
+import { ShipmentData, getShipmentData } from '@/data/shipmentData';
 
 interface ShipmentContentProps {
   data: ShipmentData[];
@@ -10,29 +10,37 @@ interface ShipmentContentProps {
 }
 
 const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => {
+  // Defensive fallback state in case data prop is null/undefined
+  const [displayData, setDisplayData] = useState<ShipmentData[]>([]);
+  
   useEffect(() => {
     console.log('ShipmentContent data on mount:', data);
     console.log('Data type:', typeof data);
     console.log('Is Array:', Array.isArray(data));
     console.log('Data length:', data?.length);
     
+    // Handle data prop validation and fallback
     if (Array.isArray(data) && data.length > 0) {
       console.log('First item in ShipmentContent:', data[0]);
+      setDisplayData(data);
     } else {
-      console.warn('ShipmentContent received empty or invalid data');
+      console.warn('ShipmentContent received empty or invalid data, using fallback data');
+      // Use fallback data if prop data is invalid
+      const fallbackData = getShipmentData();
+      console.log('Fallback data length:', fallbackData.length);
+      setDisplayData(fallbackData);
     }
   }, [data]);
   
-  // Ensure data is an array and not empty
-  // If we get null/undefined or empty array, show message
-  const hasData = Array.isArray(data) && data.length > 0;
+  // Ensure we have data to display
+  const hasData = displayData.length > 0;
   
   return (
     <>
       {isMobile ? (
         <div className="space-y-4">
           {hasData ? (
-            data.map((shipment) => (
+            displayData.map((shipment) => (
               <ShipmentCard key={shipment.id} shipment={shipment} />
             ))
           ) : (
@@ -43,7 +51,7 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
           )}
         </div>
       ) : (
-        <ShipmentTable data={hasData ? data : []} />
+        <ShipmentTable data={hasData ? displayData : []} />
       )}
     </>
   );

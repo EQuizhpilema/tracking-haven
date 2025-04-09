@@ -6,15 +6,15 @@ import FilterSidebar from './FilterSidebar';
 import ShipmentTrackingHeader from './tracking/ShipmentTrackingHeader';
 import ShipmentContent from './tracking/ShipmentContent';
 import MobileFilterDrawer from './tracking/MobileFilterDrawer';
-import { shipmentData } from '@/data/shipmentData';
+import { shipmentData, getShipmentData } from '@/data/shipmentData';
 
 const ShipmentTracking: React.FC = () => {
   const [showFilters, setShowFilters] = useState(true);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Initialize with hard-coded data - critical for ensuring data is available
-  const initialData = [...shipmentData];
+  // Initialize with direct reference to hardcoded data - critical for ensuring data is available
+  const initialData = getShipmentData();
   
   console.log('ShipmentTracking: Initial data loaded:', initialData.length, 'items');
   console.log('ShipmentTracking: First item sample:', initialData[0]);
@@ -40,10 +40,11 @@ const ShipmentTracking: React.FC = () => {
   } = useShipmentFilters();
 
   useEffect(() => {
+    // Force log entire data array for debugging
+    console.log('ShipmentTracking: initialData type:', typeof initialData);
+    console.log('ShipmentTracking: initialData is array:', Array.isArray(initialData));
     console.log('ShipmentTracking: Initial data count:', initialData.length);
     console.log('ShipmentTracking: Filtered data count:', filteredData.length);
-    
-    // Force log entire data array for debugging
     console.log('Complete shipment data array:', JSON.stringify(initialData));
   }, [initialData, filteredData]);
 
