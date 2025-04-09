@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { shipmentData, ShipmentData, getShipmentData } from '@/data/shipmentData';
+import { ShipmentData, getShipmentData } from '@/data/shipmentData';
 import { toast } from "@/components/ui/use-toast";
 
 export const useShipmentFilters = () => {
@@ -15,46 +15,38 @@ export const useShipmentFilters = () => {
   const [consigneeToggle, setConsigneeToggle] = useState(true);
   const [billToToggle, setBillToToggle] = useState(true);
   
-  // Force a hard copy of the data to ensure it's available
-  const initialData = getShipmentData();
-  
-  // Result state - initialize with the full dataset
-  const [filteredData, setFilteredData] = useState<ShipmentData[]>(initialData);
+  // Initialize with direct function call to ensure data
+  const [initialData, setInitialData] = useState<ShipmentData[]>([]);
+  const [filteredData, setFilteredData] = useState<ShipmentData[]>([]);
 
   // Initialize data on component mount
   useEffect(() => {
-    console.log('useShipmentFilters: Initial dataset count:', initialData.length);
-    
-    if (initialData.length > 0) {
-      console.log('useShipmentFilters: First item:', initialData[0]);
-      setFilteredData(initialData);
-    } else {
-      console.error('useShipmentFilters: No shipment data available to initialize filters');
-      
-      // Emergency fallback - directly set hardcoded data if initialData failed somehow
-      const fallbackData = [
-        {
-          id: '1',
-          shipDate: '04/03/25',
-          deliveryDateTime: 'OFD ETA 10:17 AM',
-          etaDate: '04/03/25',
-          shipmentNumber: '811836865',
-          bolRefs: '133200',
-          shipper: 'SPR PACKAGING LLC',
-          shipperCity: 'ROCKWALL',
-          shipTo: 'SWANSON BARK',
-          consigneeCity: 'LONGVIEW',
-          province: 'WA',
-          zip: '98632',
-          status: 'Out For Delivery on 04/04/25',
-          puPartnerPro: '165962424',
-          delPartnerPro: '',
-          onTime: 'Yes'
+    const loadData = () => {
+      try {
+        const data = getShipmentData();
+        console.log('useShipmentFilters: Initializing with data, length:', data.length);
+        
+        if (data && Array.isArray(data) && data.length > 0) {
+          console.log('useShipmentFilters: First item:', data[0]);
+          setInitialData(data);
+          setFilteredData(data);
+        } else {
+          console.error('useShipmentFilters: Invalid data returned from getShipmentData');
+          // Try one more time with a delay
+          setTimeout(() => {
+            const retryData = getShipmentData();
+            if (retryData && Array.isArray(retryData) && retryData.length > 0) {
+              setInitialData(retryData);
+              setFilteredData(retryData);
+            }
+          }, 500);
         }
-      ];
-      
-      setFilteredData(fallbackData);
-    }
+      } catch (error) {
+        console.error('useShipmentFilters: Error loading data:', error);
+      }
+    };
+    
+    loadData();
   }, []);
 
   // Handle search input changes
@@ -79,7 +71,14 @@ export const useShipmentFilters = () => {
 
   // Apply status filters to data
   const applyFilters = (data: ShipmentData[]) => {
+    if (!data || !Array.isArray(data)) {
+      console.error('applyFilters received invalid data:', data);
+      return [];
+    }
+    
     return data.filter(shipment => {
+      if (!shipment) return false;
+      
       // Status filters
       const isDelivered = shipment.status && shipment.status.includes('Delivered');
       const isPickup = shipment.status && shipment.status.includes('Picked Up');
@@ -94,6 +93,15 @@ export const useShipmentFilters = () => {
 
   // Handle applying all filters
   const handleApplyFilter = () => {
+    if (!initialData || !Array.isArray(initialData)) {
+      console.error('handleApplyFilter: initialData is invalid:', initialData);
+      // Try to reload data
+      const freshData = getShipmentData();
+      setInitialData(freshData);
+      setFilteredData(freshData);
+      return;
+    }
+    
     const filtered = applyFilters(initialData.filter(shipment => 
       searchQuery.trim() === '' ? true : 
       (shipment.shipmentNumber && shipment.shipmentNumber.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -120,11 +128,15 @@ export const useShipmentFilters = () => {
     setConsigneeToggle(true);
     setBillToToggle(true);
     setSearchQuery('');
-    setFilteredData(initialData);
+    
+    // Refresh data in case it was empty
+    const freshData = getShipmentData();
+    setInitialData(freshData);
+    setFilteredData(freshData);
     
     toast({
       title: "Filters Reset",
-      description: `All filters have been reset to default values. Showing ${initialData.length} shipments.`,
+      description: `All filters have been reset to default values. Showing ${freshData.length} shipments.`,
     });
   };
 

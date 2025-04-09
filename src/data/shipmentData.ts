@@ -18,8 +18,7 @@ export interface ShipmentData {
   onTime: string;
 }
 
-// Ensure data is available for both sandbox and preview by making it a constant export
-// Export hardcoded data directly to ensure it's available
+// Define a constant array of shipment data that will always be available
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
@@ -167,8 +166,36 @@ export const shipmentData: ShipmentData[] = [
   }
 ];
 
-// Add fallback function to always get data even if imports fail
+// Export a function that will always return the shipment data
 export function getShipmentData(): ShipmentData[] {
-  // This ensures we always have data to return
+  console.log('getShipmentData called, returning data with length:', shipmentData.length);
+  
+  // Ensure data is always returned, handling any potential issues
+  if (!shipmentData || !Array.isArray(shipmentData) || shipmentData.length === 0) {
+    console.warn('Warning: shipmentData is invalid or empty, returning fallback data');
+    
+    // Fallback data in case the main data is unavailable
+    return [
+      {
+        id: 'fallback-1',
+        shipDate: '04/03/25',
+        deliveryDateTime: 'OFD ETA 10:17 AM',
+        etaDate: '04/03/25',
+        shipmentNumber: '811836865',
+        bolRefs: '133200',
+        shipper: 'SPR PACKAGING LLC',
+        shipperCity: 'ROCKWALL',
+        shipTo: 'SWANSON BARK',
+        consigneeCity: 'LONGVIEW',
+        province: 'WA',
+        zip: '98632',
+        status: 'Out For Delivery on 04/04/25',
+        puPartnerPro: '165962424',
+        delPartnerPro: '',
+        onTime: 'Yes'
+      }
+    ];
+  }
+  
   return shipmentData;
 }

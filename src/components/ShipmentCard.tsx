@@ -18,7 +18,9 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
       <Card className="p-4 border rounded-lg shadow-sm">
         <CardContent className="text-red-500 p-0 pt-2">
           <p>Invalid shipment data</p>
-          <p className="text-xs mt-1">Details: {JSON.stringify(shipment)}</p>
+          {shipment !== undefined && (
+            <p className="text-xs mt-1">Details: {JSON.stringify(shipment)}</p>
+          )}
         </CardContent>
       </Card>
     );
@@ -36,7 +38,23 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
     );
   }
   
-  console.log('ShipmentCard received shipment ID:', shipment.id);
+  // Verify all required fields exist
+  const requiredFields = ['shipper', 'shipmentNumber', 'status'];
+  const missingFields = requiredFields.filter(field => !shipment[field as keyof ShipmentData]);
+  
+  if (missingFields.length > 0) {
+    console.error(`Shipment missing required fields: ${missingFields.join(', ')}`, shipment);
+    return (
+      <Card className="p-4 border rounded-lg shadow-sm">
+        <CardContent className="text-red-500 p-0 pt-2">
+          <p>Incomplete shipment data (missing: {missingFields.join(', ')})</p>
+          <p className="text-xs mt-1">ID: {shipment.id}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+  
+  console.log('ShipmentCard rendering shipment ID:', shipment.id);
   
   return (
     <Card className="overflow-hidden">

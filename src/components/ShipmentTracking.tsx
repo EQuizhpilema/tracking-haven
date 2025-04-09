@@ -6,18 +6,30 @@ import FilterSidebar from './FilterSidebar';
 import ShipmentTrackingHeader from './tracking/ShipmentTrackingHeader';
 import ShipmentContent from './tracking/ShipmentContent';
 import MobileFilterDrawer from './tracking/MobileFilterDrawer';
-import { shipmentData, getShipmentData } from '@/data/shipmentData';
+import { getShipmentData } from '@/data/shipmentData';
 
 const ShipmentTracking: React.FC = () => {
   const [showFilters, setShowFilters] = useState(true);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Initialize with direct reference to hardcoded data - critical for ensuring data is available
-  const initialData = getShipmentData();
+  // Force direct data fetching to ensure data is available
+  const [directData, setDirectData] = useState(getShipmentData());
   
-  console.log('ShipmentTracking: Initial data loaded:', initialData.length, 'items');
-  console.log('ShipmentTracking: First item sample:', initialData[0]);
+  useEffect(() => {
+    // Ensure data is loaded on mount
+    const data = getShipmentData();
+    console.log('ShipmentTracking: Initial data loaded:', data.length, 'items');
+    if (data.length > 0) {
+      console.log('ShipmentTracking: First item sample:', data[0]);
+      setDirectData(data);
+    } else {
+      console.error('Failed to load data, attempting to reload');
+      // Second attempt to load data
+      const retryData = getShipmentData();
+      setDirectData(retryData);
+    }
+  }, []);
   
   const {
     searchQuery,
@@ -41,12 +53,11 @@ const ShipmentTracking: React.FC = () => {
 
   useEffect(() => {
     // Force log entire data array for debugging
-    console.log('ShipmentTracking: initialData type:', typeof initialData);
-    console.log('ShipmentTracking: initialData is array:', Array.isArray(initialData));
-    console.log('ShipmentTracking: Initial data count:', initialData.length);
+    console.log('ShipmentTracking: directData type:', typeof directData);
+    console.log('ShipmentTracking: directData is array:', Array.isArray(directData));
+    console.log('ShipmentTracking: Direct data count:', directData.length);
     console.log('ShipmentTracking: Filtered data count:', filteredData.length);
-    console.log('Complete shipment data array:', JSON.stringify(initialData));
-  }, [initialData, filteredData]);
+  }, [directData, filteredData]);
 
   // Common filter props used in multiple places
   const filterProps = {
@@ -71,8 +82,9 @@ const ShipmentTracking: React.FC = () => {
     onBillToPartyToggle
   };
 
-  // Guarantee that we always have data to display, even if filters remove everything
-  const displayData = filteredData.length > 0 ? filteredData : initialData;
+  // Guarantee that we always have data to display
+  // First try filtered data, then direct data loaded in this component
+  const displayData = filteredData.length > 0 ? filteredData : directData;
 
   return (
     <div className="min-h-screen bg-white animate-fade-in">
@@ -115,9 +127,9 @@ const ShipmentTracking: React.FC = () => {
             isMobile={isMobile} 
           />
           
-          {/* Debug information - remove in production */}
+          {/* Debug information */}
           <div className="mt-4 text-xs text-gray-400 border-t pt-2">
-            Filtered shipments: {filteredData.length} | Total shipments: {initialData.length}
+            Filtered shipments: {filteredData.length} | Direct shipments: {directData.length}
           </div>
         </main>
       </div>
