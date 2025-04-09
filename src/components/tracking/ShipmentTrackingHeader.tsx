@@ -2,7 +2,7 @@
 import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FileText, Filter, Search } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
 import { DrawerTrigger } from "@/components/ui/drawer";
 
@@ -63,11 +63,15 @@ const ShipmentTrackingHeader: React.FC<ShipmentTrackingHeaderProps> = ({
       
       <Button
         variant="outline"
-        className="w-full md:w-auto mt-3 md:mt-0 flex items-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
+        className="w-full md:w-auto mt-3 md:mt-0 flex items-center justify-center bg-tracking-blue text-white hover:bg-blue-600 transition-colors"
         onClick={handleExportToExcel}
       >
-        <FileText className="mr-2 h-4 w-4" />
-        Export To Excel
+        {isMobile ? 'Export To Excel' : (
+          <>
+            <FileText className="mr-2 h-4 w-4" />
+            Export To Excel
+          </>
+        )}
       </Button>
     </div>
   );
