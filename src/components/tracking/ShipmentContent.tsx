@@ -15,6 +15,12 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
     console.log('Data type:', typeof data);
     console.log('Is Array:', Array.isArray(data));
     console.log('Data length:', data?.length);
+    
+    if (Array.isArray(data) && data.length > 0) {
+      console.log('First item in ShipmentContent:', data[0]);
+    } else {
+      console.warn('ShipmentContent received empty or invalid data');
+    }
   }, [data]);
   
   // Ensure data is an array and not empty
@@ -29,7 +35,10 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
               <ShipmentCard key={shipment.id} shipment={shipment} />
             ))
           ) : (
-            <div className="text-center py-8">No shipment data available</div>
+            <div className="text-center py-8 border rounded-lg">
+              <p className="font-medium text-gray-500">No shipment data available</p>
+              <p className="text-sm text-gray-400 mt-1">Try adjusting your filters or search criteria</p>
+            </div>
           )}
         </div>
       ) : (

@@ -13,6 +13,10 @@ const ShipmentTracking: React.FC = () => {
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
   
+  // Force-add sample data for debugging
+  const initialData = shipmentData.length > 0 ? shipmentData : [];
+  console.log('ShipmentTracking: Initial data loaded:', initialData.length, 'items');
+  
   const {
     searchQuery,
     filteredData,
@@ -34,9 +38,10 @@ const ShipmentTracking: React.FC = () => {
   } = useShipmentFilters();
 
   useEffect(() => {
-    console.log('ShipmentTracking: Initial data count:', shipmentData.length);
+    console.log('ShipmentTracking: Initial data count:', initialData.length);
     console.log('ShipmentTracking: Filtered data count:', filteredData.length);
-  }, [filteredData]);
+    console.log('ShipmentTracking: Data sample:', initialData.slice(0, 2));
+  }, [initialData, filteredData]);
 
   // Common filter props used in multiple places
   const filterProps = {
@@ -97,11 +102,14 @@ const ShipmentTracking: React.FC = () => {
           )}
           
           {/* Table or Card View based on screen size */}
-          <ShipmentContent data={filteredData} isMobile={isMobile} />
+          <ShipmentContent 
+            data={filteredData.length > 0 ? filteredData : initialData} 
+            isMobile={isMobile} 
+          />
           
           {/* Debug information - remove in production */}
           <div className="mt-4 text-xs text-gray-400 border-t pt-2">
-            Filtered shipments: {filteredData.length}
+            Filtered shipments: {filteredData.length} | Total shipments: {initialData.length}
           </div>
         </main>
       </div>

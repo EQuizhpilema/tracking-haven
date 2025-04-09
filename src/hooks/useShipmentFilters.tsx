@@ -15,13 +15,21 @@ export const useShipmentFilters = () => {
   const [consigneeToggle, setConsigneeToggle] = useState(true);
   const [billToToggle, setBillToToggle] = useState(true);
   
-  // Result state
-  const [filteredData, setFilteredData] = useState<ShipmentData[]>([]);
+  // Result state - initialize with the full dataset
+  const [filteredData, setFilteredData] = useState<ShipmentData[]>(shipmentData);
 
   // Initialize data on component mount
   useEffect(() => {
+    console.log('useShipmentFilters: Initial dataset:', shipmentData);
     console.log('useShipmentFilters: Initializing with data count:', shipmentData.length);
-    setFilteredData(shipmentData);
+    console.log('useShipmentFilters: First item:', shipmentData[0]);
+    
+    // Ensure we're working with the correct data format
+    if (shipmentData.length > 0) {
+      setFilteredData(shipmentData);
+    } else {
+      console.error('useShipmentFilters: No shipment data available to initialize filters');
+    }
   }, []);
 
   // Handle search input changes
@@ -35,10 +43,10 @@ export const useShipmentFilters = () => {
     }
     
     const searchFiltered = shipmentData.filter(shipment => 
-      shipment.shipmentNumber.toLowerCase().includes(query.toLowerCase()) ||
-      shipment.bolRefs.toLowerCase().includes(query.toLowerCase()) ||
-      shipment.shipper.toLowerCase().includes(query.toLowerCase()) ||
-      shipment.shipTo.toLowerCase().includes(query.toLowerCase())
+      (shipment.shipmentNumber && shipment.shipmentNumber.toLowerCase().includes(query.toLowerCase())) ||
+      (shipment.bolRefs && shipment.bolRefs.toLowerCase().includes(query.toLowerCase())) ||
+      (shipment.shipper && shipment.shipper.toLowerCase().includes(query.toLowerCase())) ||
+      (shipment.shipTo && shipment.shipTo.toLowerCase().includes(query.toLowerCase()))
     );
     
     setFilteredData(applyFilters(searchFiltered));
@@ -48,8 +56,8 @@ export const useShipmentFilters = () => {
   const applyFilters = (data: ShipmentData[]) => {
     return data.filter(shipment => {
       // Status filters
-      const isDelivered = shipment.status.includes('Delivered');
-      const isPickup = shipment.status.includes('Picked Up');
+      const isDelivered = shipment.status && shipment.status.includes('Delivered');
+      const isPickup = shipment.status && shipment.status.includes('Picked Up');
       
       if (!deliveredToggle && isDelivered) return false;
       if (!undeliveredToggle && !isDelivered && !isPickup) return false;
@@ -63,10 +71,10 @@ export const useShipmentFilters = () => {
   const handleApplyFilter = () => {
     const filtered = applyFilters(shipmentData.filter(shipment => 
       searchQuery.trim() === '' ? true : 
-      shipment.shipmentNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      shipment.bolRefs.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      shipment.shipper.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      shipment.shipTo.toLowerCase().includes(searchQuery.toLowerCase())
+      (shipment.shipmentNumber && shipment.shipmentNumber.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (shipment.bolRefs && shipment.bolRefs.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (shipment.shipper && shipment.shipper.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (shipment.shipTo && shipment.shipTo.toLowerCase().includes(searchQuery.toLowerCase()))
     ));
     
     console.log('Applying filters, filtered count:', filtered.length);
@@ -74,7 +82,7 @@ export const useShipmentFilters = () => {
     
     toast({
       title: "Filters Applied",
-      description: "Your filter settings have been applied to the data.",
+      description: `Your filter settings have been applied to ${filtered.length} shipments.`,
     });
   };
 
@@ -91,7 +99,7 @@ export const useShipmentFilters = () => {
     
     toast({
       title: "Filters Reset",
-      description: "All filters have been reset to default values.",
+      description: `All filters have been reset to default values. Showing ${shipmentData.length} shipments.`,
     });
   };
 
