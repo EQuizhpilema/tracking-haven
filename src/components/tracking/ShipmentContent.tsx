@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
 import ShipmentTable from '../ShipmentTable';
-import ShipmentCard from '../ShipmentCard';
 import { ShipmentData, getShipmentData } from '@/data/shipmentData';
 import { Separator } from "@/components/ui/separator";
 
