@@ -13,9 +13,11 @@ const ShipmentTracking: React.FC = () => {
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Force-add sample data for debugging
-  const initialData = shipmentData.length > 0 ? shipmentData : [];
+  // Ensure we have data by using the imported shipmentData directly
+  const initialData = shipmentData;
+  
   console.log('ShipmentTracking: Initial data loaded:', initialData.length, 'items');
+  console.log('ShipmentTracking: First item sample:', initialData[0]);
   
   const {
     searchQuery,
@@ -40,7 +42,9 @@ const ShipmentTracking: React.FC = () => {
   useEffect(() => {
     console.log('ShipmentTracking: Initial data count:', initialData.length);
     console.log('ShipmentTracking: Filtered data count:', filteredData.length);
-    console.log('ShipmentTracking: Data sample:', initialData.slice(0, 2));
+    
+    // Force log entire data array for debugging
+    console.log('Complete shipment data array:', JSON.stringify(initialData));
   }, [initialData, filteredData]);
 
   // Common filter props used in multiple places

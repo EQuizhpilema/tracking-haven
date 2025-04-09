@@ -10,11 +10,22 @@ interface ShipmentCardProps {
 }
 
 const ShipmentCard: React.FC<ShipmentCardProps> = ({ shipment }) => {
-  if (!shipment || !shipment.id) {
-    console.error('Invalid shipment data received:', shipment);
+  // More robust error checking
+  if (!shipment || typeof shipment !== 'object') {
+    console.error('Invalid shipment data received (not an object):', shipment);
     return (
       <div className="p-4 text-red-500 border rounded-lg shadow-sm">
         <p>Invalid shipment data</p>
+        <p className="text-xs mt-1">Details: {JSON.stringify(shipment)}</p>
+      </div>
+    );
+  }
+  
+  if (!shipment.id) {
+    console.error('Invalid shipment data received (missing ID):', shipment);
+    return (
+      <div className="p-4 text-red-500 border rounded-lg shadow-sm">
+        <p>Invalid shipment data (missing ID)</p>
         <p className="text-xs mt-1">Details: {JSON.stringify(shipment)}</p>
       </div>
     );

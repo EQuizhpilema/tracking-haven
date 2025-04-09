@@ -24,14 +24,15 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
   }, [data]);
   
   // Ensure data is an array and not empty
-  const validData = Array.isArray(data) && data.length > 0 ? data : [];
+  // If we get null/undefined or empty array, show message
+  const hasData = Array.isArray(data) && data.length > 0;
   
   return (
     <>
       {isMobile ? (
         <div className="space-y-4">
-          {validData.length > 0 ? (
-            validData.map((shipment) => (
+          {hasData ? (
+            data.map((shipment) => (
               <ShipmentCard key={shipment.id} shipment={shipment} />
             ))
           ) : (
@@ -42,7 +43,7 @@ const ShipmentContent: React.FC<ShipmentContentProps> = ({ data, isMobile }) => 
           )}
         </div>
       ) : (
-        <ShipmentTable data={validData} />
+        <ShipmentTable data={hasData ? data : []} />
       )}
     </>
   );
