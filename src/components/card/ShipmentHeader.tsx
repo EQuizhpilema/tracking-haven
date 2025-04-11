@@ -8,7 +8,7 @@ interface ShipmentHeaderProps {
 }
 
 const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
-  // Function to format route as "City, State to City, State"
+  // Updated function to format route as "City, State to City, State"
   const formatRoute = () => {
     return `${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`;
   };
