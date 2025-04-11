@@ -44,25 +44,29 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
 
   return (
     <div className="mb-3">
-      <div className="flex flex-col">
-        <h3 className="font-bold">{shipment.shipper}</h3>
-        <div className="text-blue-600">
-          <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
-            {shipment.shipmentNumber}
-          </a>
+      <div className="flex justify-between items-start pr-4"> {/* Added pr-4 for right padding */}
+        <div>
+          <h3 className="font-bold">{shipment.shipper}</h3>
+          <div className="text-blue-600">
+            <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
+              {shipment.shipmentNumber}
+            </a>
+          </div>
+          <div className="text-sm text-gray-600">
+            BOL/Ref# {shipment.bolRefs}
+          </div>
         </div>
-        <div className="text-sm text-gray-600">
-          BOL/Ref# {shipment.bolRefs}
-        </div>
-        <div className="flex items-center mt-1">
-          {isDelivered ? (
-            <CheckCircle size={16} className="text-tracking-success mr-1" />
-          ) : (
-            <Truck size={16} className="text-tracking-blue mr-1" />
-          )}
-          <span className={`text-sm ${isDelivered ? 'text-tracking-success' : 'text-tracking-blue'}`}>
+        <div className="flex flex-col items-end">
+          <span className="text-md font-semibold text-black"> {/* Increased text size and added font-semibold */}
             {statusText}
           </span>
+          <div className="mt-1">
+            {isDelivered ? (
+              <CheckCircle size={24} className="text-tracking-success" /> // Increased icon size
+            ) : (
+              <Truck size={24} className="text-tracking-blue" /> // Increased icon size
+            )}
+          </div>
         </div>
       </div>
     </div>
