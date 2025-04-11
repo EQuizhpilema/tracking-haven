@@ -8,6 +8,11 @@ interface ShipmentHeaderProps {
 }
 
 const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
+  // Function to format route as "City, State to City, State"
+  const formatRoute = () => {
+    return `${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`;
+  };
+
   // Function to extract just the status without the date
   const getStatusText = (status: string) => {
     // Common status patterns to extract
@@ -41,10 +46,11 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
 
   const isDelivered = shipment.status.includes('Delivered');
   const statusText = getStatusText(shipment.status);
+  const route = formatRoute();
 
   return (
     <div className="mb-3">
-      <div className="flex justify-between items-start pr-4"> {/* Added pr-4 for right padding */}
+      <div className="flex justify-between items-start pr-4">
         <div>
           <h3 className="font-bold">{shipment.shipper}</h3>
           <div className="text-blue-600">
@@ -55,16 +61,19 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
           <div className="text-sm text-gray-600">
             BOL/Ref# {shipment.bolRefs}
           </div>
+          <div className="text-sm text-gray-700 mt-1">
+            {route}
+          </div>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-md font-semibold text-black"> {/* Increased text size and added font-semibold */}
+          <span className="text-md font-semibold text-black">
             {statusText}
           </span>
           <div className="mt-1">
             {isDelivered ? (
-              <CheckCircle size={24} className="text-tracking-success" /> // Increased icon size
+              <CheckCircle size={24} className="text-tracking-success" />
             ) : (
-              <Truck size={24} className="text-tracking-blue" /> // Increased icon size
+              <Truck size={24} className="text-tracking-blue" />
             )}
           </div>
         </div>
