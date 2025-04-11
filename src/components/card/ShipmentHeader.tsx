@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { ShipmentData } from '@/data/shipmentData';
-import { CheckCircle, Truck } from 'lucide-react';
+import { CheckCircle, Truck, Building } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ShipmentHeaderProps {
   shipment: ShipmentData;
@@ -46,7 +47,21 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
     <div className="mb-3">
       <div className="flex justify-between items-start pr-4">
         <div>
-          <h3 className="font-bold">{shipment.shipTo}</h3>
+          <div className="flex items-center gap-1">
+            <h3 className="font-bold">{shipment.shipTo}</h3>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="cursor-help">
+                    <Building size={16} className="text-tracking-textGray" />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Consignee</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
           <div className="text-blue-600">
             <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
               {shipment.shipmentNumber}
