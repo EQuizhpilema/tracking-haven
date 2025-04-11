@@ -61,7 +61,7 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
             </div>
           )}
         </div>
-        <div className="flex flex-col items-end">
+        <div className="flex flex-col items-end text-right">
           <span className="text-md font-semibold text-black">
             {statusText}
           </span>
