@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ShipmentData } from '@/data/shipmentData';
 import { CheckCircle, Truck } from 'lucide-react';
