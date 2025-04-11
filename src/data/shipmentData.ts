@@ -1,6 +1,6 @@
 
 export interface ShipmentData {
-  id: string | number;
+  id: string;
   shipDate: string;
   deliveryDateTime: string;
   etaDate: string;
@@ -18,7 +18,6 @@ export interface ShipmentData {
   onTime: string;
 }
 
-// Define a constant array of shipment data that will always be available
 export const shipmentData: ShipmentData[] = [
   {
     id: '1',
@@ -127,75 +126,5 @@ export const shipmentData: ShipmentData[] = [
     puPartnerPro: '165971234',
     delPartnerPro: '183456789',
     onTime: 'No'
-  },
-  {
-    id: '7',
-    shipDate: '04/01/25',
-    deliveryDateTime: '04/04/25 14:30',
-    etaDate: '04/04/25',
-    shipmentNumber: 'SHP-12345678',
-    bolRefs: 'BOL1234567',
-    shipper: 'TechGlobal Inc.',
-    shipperCity: 'San Francisco',
-    shipTo: 'ElectroFuture Corp',
-    consigneeCity: 'Atlanta',
-    province: 'GA',
-    zip: '30301',
-    status: 'Delivered on 04/04/25',
-    puPartnerPro: 'PU123456',
-    delPartnerPro: 'DEL789012',
-    onTime: 'Yes'
-  },
-  {
-    id: '8',
-    shipDate: '04/02/25',
-    deliveryDateTime: '04/06/25 10:15',
-    etaDate: '04/06/25',
-    shipmentNumber: 'SHP-23456789',
-    bolRefs: 'BOL2345678',
-    shipper: 'BioMed Solutions',
-    shipperCity: 'Boston',
-    shipTo: 'Hospitech Industries',
-    consigneeCity: 'Chicago',
-    province: 'IL',
-    zip: '60601',
-    status: 'In Transit - Memphis',
-    puPartnerPro: 'PU234567',
-    delPartnerPro: '',
-    onTime: 'Yes'
   }
 ];
-
-// Export a function that will always return the shipment data
-export function getShipmentData(): ShipmentData[] {
-  console.log('getShipmentData called, returning data with length:', shipmentData.length);
-  
-  // Ensure data is always returned, handling any potential issues
-  if (!shipmentData || !Array.isArray(shipmentData) || shipmentData.length === 0) {
-    console.warn('Warning: shipmentData is invalid or empty, returning fallback data');
-    
-    // Fallback data in case the main data is unavailable
-    return [
-      {
-        id: 'fallback-1',
-        shipDate: '04/03/25',
-        deliveryDateTime: 'OFD ETA 10:17 AM',
-        etaDate: '04/03/25',
-        shipmentNumber: '811836865',
-        bolRefs: '133200',
-        shipper: 'SPR PACKAGING LLC',
-        shipperCity: 'ROCKWALL',
-        shipTo: 'SWANSON BARK',
-        consigneeCity: 'LONGVIEW',
-        province: 'WA',
-        zip: '98632',
-        status: 'Out For Delivery on 04/04/25',
-        puPartnerPro: '165962424',
-        delPartnerPro: '',
-        onTime: 'Yes'
-      }
-    ];
-  }
-  
-  return shipmentData;
-}

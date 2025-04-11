@@ -1,228 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tracking Haven</title>
-  <!-- MDB Bootstrap Pro CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Header -->
-  <div class="bg-light border-bottom border-gray py-4 px-6 mb-6">
-    <h1 class="text-2xl font-medium text-center text-gray-800">Shipment Tracking</h1>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tracking-haven</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
 
-  <div class="container-fluid px-4">
-    <div class="row">
-      <!-- Sidebar -->
-      <div id="filter-sidebar" class="col-md-3 col-lg-2 d-none d-md-block">
-        <div class="bg-white border-end border-gray p-4 h-100">
-          <div class="fs-5 fw-semibold mb-4">Shipment Filters</div>
-          
-          <!-- Date Range Filter -->
-          <div class="mb-4">
-            <div class="fw-medium mb-2">Date Range</div>
-            <select id="date-range-select" class="form-select mb-3">
-              <option value="last7">Last 7 Days</option>
-              <option value="last14">Last 14 Days</option>
-              <option value="last30">Last 30 Days</option>
-              <option value="custom">Custom Range</option>
-            </select>
-            
-            <div id="custom-date-container" class="d-none">
-              <div class="mb-2">
-                <label for="start-date" class="form-label">Start Date</label>
-                <input type="date" id="start-date" class="form-control">
-              </div>
-              <div class="mb-2">
-                <label for="end-date" class="form-label">End Date</label>
-                <input type="date" id="end-date" class="form-control">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Service Type Filter -->
-          <div class="mb-4">
-            <div class="fw-medium mb-2">Service Type</div>
-            <select id="service-type-select" class="form-select">
-              <option value="all">All Services</option>
-              <option value="ltl">Less Than Truckload (LTL)</option>
-              <option value="ftl">Full Truckload (FTL)</option>
-              <option value="intermodal">Intermodal</option>
-              <option value="expedited">Expedited</option>
-            </select>
-          </div>
-          
-          <!-- Shipper Role Filter -->
-          <div class="mb-4">
-            <div class="fw-medium mb-2">Your Role</div>
-            
-            <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" id="shipper-toggle" checked>
-              <label class="form-check-label" for="shipper-toggle">Shipper</label>
-            </div>
-            
-            <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" id="consignee-toggle" checked>
-              <label class="form-check-label" for="consignee-toggle">Consignee</label>
-            </div>
-            
-            <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" id="bill-to-toggle" checked>
-              <label class="form-check-label" for="bill-to-toggle">Bill-To-Party</label>
-            </div>
-          </div>
-          
-          <!-- Shipment Status Filter -->
-          <div class="mb-4">
-            <div class="fw-medium mb-2">Shipment Status</div>
-            
-            <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" id="delivered-toggle" checked>
-              <label class="form-check-label" for="delivered-toggle">Delivered</label>
-            </div>
-            
-            <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" id="undelivered-toggle" checked>
-              <label class="form-check-label" for="undelivered-toggle">Undelivered</label>
-            </div>
-            
-            <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" id="pickups-toggle" checked>
-              <label class="form-check-label" for="pickups-toggle">Pickups</label>
-            </div>
-          </div>
-          
-          <!-- Filter Actions -->
-          <div class="d-grid gap-2">
-            <button id="apply-filter-btn" class="btn btn-primary btn-rounded d-flex align-items-center justify-content-center">
-              <i class="fas fa-search me-2"></i>
-              Apply Filter
-            </button>
-            <button id="reset-filter-btn" class="btn btn-outline-secondary btn-rounded">
-              Reset Filter
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Main Content -->
-      <div class="col-md-9 col-lg-10 ms-sm-auto">
-        <!-- Top Controls -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
-          <button id="toggle-filters-btn" class="btn btn-primary btn-rounded d-md-none w-100">
-            <i class="fas fa-filter me-2"></i>
-            Filters
-          </button>
-          
-          <div class="d-flex flex-column flex-md-row w-100 gap-3">
-            <button id="show-filters-btn" class="btn btn-primary btn-rounded d-none d-md-flex align-items-center">
-              <i class="fas fa-search me-2"></i>
-              <span id="filter-btn-text">Hide Filters</span>
-            </button>
-            
-            <div class="flex-grow-1">
-              <input id="search-input" type="text" class="form-control" 
-                placeholder="Search by Shipment Number, BOL, Shipper, or Ship-To">
-            </div>
-            
-            <button id="export-excel-btn" class="btn btn-primary btn-rounded d-flex align-items-center">
-              <i class="fas fa-file-excel me-2"></i>
-              Export To Excel
-            </button>
-          </div>
-        </div>
-        
-        <!-- Mobile Filter Drawer (hidden by default) -->
-        <div id="mobile-filter-drawer" class="d-md-none position-fixed top-0 start-0 w-100 h-100 bg-white p-4 z-1050" style="display:none; overflow: auto;">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="mb-0">Filters</h5>
-            <button id="close-drawer-btn" class="btn-close"></button>
-          </div>
-          <div id="mobile-filters-container">
-            <!-- Filter content will be cloned here -->
-          </div>
-        </div>
-        
-        <!-- Table View (desktop) -->
-        <div id="table-container" class="d-none d-md-block overflow-auto">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th class="sortable" data-field="shipDate">Ship Date <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="deliveryDateTime">Delivery Date and Time <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="etaDate">ETA Date <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="shipmentNumber">Shipment Number <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="bolRefs">BOL / Reference Number <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="shipper">Shipper <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="shipperCity">Shipper City <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="shipTo">Consignee <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="consigneeCity">Consignee City <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="province">State <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="zip">Zip <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="status">Status <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="puPartnerPro">PU Partner Pro <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="delPartnerPro">Del Partner Pro <i class="fas fa-sort"></i></th>
-                <th class="sortable" data-field="onTime">On Time <i class="fas fa-sort"></i></th>
-              </tr>
-            </thead>
-            <tbody id="shipment-table-body">
-              <!-- Table rows will be inserted here -->
-            </tbody>
-          </table>
-          
-          <!-- Table Pagination -->
-          <div class="d-flex justify-content-end align-items-center mt-3 p-2">
-            <div class="d-flex align-items-center">
-              <span class="me-2 text-sm text-gray-600">Rows per page:</span>
-              <select id="rows-per-page" class="form-select form-select-sm" style="width: 70px;">
-                <option value="5">5</option>
-                <option value="10" selected>10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-              </select>
-              
-              <span id="pagination-info" class="ms-4 text-sm text-gray-600">
-                1 - 10 of 0
-              </span>
-              
-              <button id="prev-page-btn" class="btn btn-link btn-sm p-1" disabled>
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              
-              <button id="next-page-btn" class="btn btn-link btn-sm p-1" disabled>
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Cards View (mobile) -->
-        <div id="cards-container" class="d-md-none">
-          <!-- Shipment cards will be inserted here -->
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Toast Container for Notifications -->
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="toast-container"></div>
-  </div>
+    <meta property="og:title" content="Lovable Generated Project" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-  <!-- MDB Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-  <!-- Custom JS -->
-  <script src="js/shipmentData.js"></script>
-  <script src="js/shipmentHeader.js"></script>
-  <script src="js/shipmentDetails.js"></script>
-  <script src="js/app.js"></script>
-</body>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

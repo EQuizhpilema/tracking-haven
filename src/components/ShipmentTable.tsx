@@ -6,7 +6,7 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { ShipmentData } from '@/data/shipmentData';
+import { ShipmentData } from '../data/shipmentData';
 import SortableHeader from './table/SortableHeader';
 import TablePagination from './table/TablePagination';
 import ShipmentTableRow from './table/ShipmentTableRow';
@@ -17,7 +17,6 @@ interface ShipmentTableProps {
 }
 
 const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
-  console.log('ShipmentTable received data:', data); // Add logging to debug data
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   
@@ -35,11 +34,10 @@ const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
           <TableHeader className="h-[40px]">
             <TableRow>
               <SortableHeader field="shipDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Ship Date</SortableHeader>
-              <SortableHeader field="deliveryDateTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Del Date</SortableHeader>
-              <SortableHeader field="deliveryDateTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Del Time</SortableHeader>
+              <SortableHeader field="deliveryDateTime" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Delivery Date and Time</SortableHeader>
               <SortableHeader field="etaDate" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>ETA Date</SortableHeader>
               <SortableHeader field="shipmentNumber" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipment Number</SortableHeader>
-              <SortableHeader field="bolRefs" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>BOL/Ref #</SortableHeader>
+              <SortableHeader field="bolRefs" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>BOL / Reference Number</SortableHeader>
               <SortableHeader field="shipper" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper</SortableHeader>
               <SortableHeader field="shipperCity" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Shipper City</SortableHeader>
               <SortableHeader field="shipTo" currentSortField={sortField} sortDirection={sortDirection} onSort={handleSort}>Consignee</SortableHeader>
@@ -53,17 +51,9 @@ const ShipmentTable: React.FC<ShipmentTableProps> = ({ data }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {currentData.length > 0 ? (
-              currentData.map((shipment) => (
-                <ShipmentTableRow key={shipment.id} shipment={shipment} />
-              ))
-            ) : (
-              <TableRow>
-                <td colSpan={16} className="text-center py-4">
-                  No shipments found matching your criteria
-                </td>
-              </TableRow>
-            )}
+            {currentData.map((shipment) => (
+              <ShipmentTableRow key={shipment.id} shipment={shipment} />
+            ))}
           </TableBody>
         </Table>
       </div>

@@ -9,44 +9,22 @@ import FilterActions from './filters/FilterActions';
 interface FilterSidebarProps {
   onApplyFilter: () => void;
   onResetFilter: () => void;
-  // Status filter props
-  deliveredToggle?: boolean;
-  undeliveredToggle?: boolean;
-  pickupsToggle?: boolean;
-  onDeliveredToggle?: () => void;
-  onUndeliveredToggle?: () => void;
-  onPickupsToggle?: () => void;
-  // Role filter props
-  shipperToggle?: boolean;
-  consigneeToggle?: boolean;
-  billToToggle?: boolean;
-  onShipperToggle?: () => void;
-  onConsigneeToggle?: () => void;
-  onBillToPartyToggle?: () => void;
 }
 
 const FilterSidebar: React.FC<FilterSidebarProps> = ({ 
   onApplyFilter, 
-  onResetFilter,
-  // Status filter props with defaults
-  deliveredToggle = true,
-  undeliveredToggle = true,
-  pickupsToggle = true,
-  onDeliveredToggle = () => {},
-  onUndeliveredToggle = () => {},
-  onPickupsToggle = () => {},
-  // Role filter props with defaults
-  shipperToggle = true,
-  consigneeToggle = true,
-  billToToggle = true,
-  onShipperToggle = () => {},
-  onConsigneeToggle = () => {},
-  onBillToPartyToggle = () => {}
+  onResetFilter 
 }) => {
   const [dateRange, setDateRange] = useState('last7');
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [serviceType, setServiceType] = useState('all');
+  const [shipperToggle, setShipperToggle] = useState(true);
+  const [consigneeToggle, setConsigneeToggle] = useState(true);
+  const [billToPartyToggle, setBillToPartyToggle] = useState(true);
+  const [deliveredToggle, setDeliveredToggle] = useState(true);
+  const [undeliveredToggle, setUndeliveredToggle] = useState(true);
+  const [pickupsToggle, setPickupsToggle] = useState(true);
 
   const handleDateRangeChange = (value: string) => {
     setDateRange(value);
@@ -91,19 +69,19 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       <ShipperRoleFilter 
         shipperToggle={shipperToggle}
         consigneeToggle={consigneeToggle}
-        billToPartyToggle={billToToggle}
-        onShipperToggle={onShipperToggle}
-        onConsigneeToggle={onConsigneeToggle}
-        onBillToPartyToggle={onBillToPartyToggle}
+        billToPartyToggle={billToPartyToggle}
+        onShipperToggle={() => setShipperToggle(!shipperToggle)}
+        onConsigneeToggle={() => setConsigneeToggle(!consigneeToggle)}
+        onBillToPartyToggle={() => setBillToPartyToggle(!billToPartyToggle)}
       />
       
       <ShipmentStatusFilter 
         deliveredToggle={deliveredToggle}
         undeliveredToggle={undeliveredToggle}
         pickupsToggle={pickupsToggle}
-        onDeliveredToggle={onDeliveredToggle}
-        onUndeliveredToggle={onUndeliveredToggle}
-        onPickupsToggle={onPickupsToggle}
+        onDeliveredToggle={() => setDeliveredToggle(!deliveredToggle)}
+        onUndeliveredToggle={() => setUndeliveredToggle(!undeliveredToggle)}
+        onPickupsToggle={() => setPickupsToggle(!pickupsToggle)}
       />
       
       <FilterActions 

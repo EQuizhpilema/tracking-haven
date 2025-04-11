@@ -16,22 +16,11 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
   
   // Remove date information from the status
   displayStatus = displayStatus.replace(/ on \d{2}\/\d{2}\/\d{2}/, '');
-  
-  // Extract time from delivery date/time if it exists
-  const deliveryTime = shipment.deliveryDateTime?.includes(' ') 
-    ? shipment.deliveryDateTime.split(' ').slice(1).join(' ')
-    : '';
-    
-  // Format for display with special handling for "Completed" status
-  const formattedStatus = displayStatus.includes('Completed')
-    ? displayStatus.toUpperCase()
-    : displayStatus;
 
   return (
-    <TableRow className="h-[36px]">
+    <TableRow key={shipment.id} className="h-[36px]">
       <TableCell className="p-2 whitespace-nowrap">{shipment.shipDate}</TableCell>
-      <TableCell className="p-2 whitespace-nowrap">{shipment.deliveryDateTime?.split(' ')[0] || '-'}</TableCell>
-      <TableCell className="p-2 whitespace-nowrap">{deliveryTime || '-'}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{shipment.deliveryDateTime || '-'}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.etaDate}</TableCell>
       <TableCell className="p-2 whitespace-nowrap font-medium text-blue-600">
         <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
@@ -45,7 +34,7 @@ const ShipmentTableRow: React.FC<ShipmentTableRowProps> = ({ shipment }) => {
       <TableCell className="p-2 whitespace-nowrap">{shipment.consigneeCity}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.province}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.zip}</TableCell>
-      <TableCell className="p-2 whitespace-nowrap">{formattedStatus}</TableCell>
+      <TableCell className="p-2 whitespace-nowrap">{displayStatus}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.puPartnerPro || '-'}</TableCell>
       <TableCell className="p-2 whitespace-nowrap">{shipment.delPartnerPro || '-'}</TableCell>
       <TableCell className="p-2 whitespace-nowrap text-center">
