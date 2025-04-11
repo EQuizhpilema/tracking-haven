@@ -46,7 +46,6 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
 
   const isDelivered = shipment.status.includes('Delivered');
   const statusText = getStatusText(shipment.status);
-  const route = formatRoute();
 
   return (
     <div className="mb-3">
@@ -61,8 +60,8 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
           <div className="text-sm text-gray-600">
             BOL/Ref# {shipment.bolRefs}
           </div>
-          <div className="text-sm text-gray-700 mt-1">
-            {route}
+          <div className="text-sm text-gray-700">
+            {`${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`}
           </div>
         </div>
         <div className="flex flex-col items-end">
