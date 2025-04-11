@@ -96,7 +96,7 @@ const ShipmentDetails: React.FC<ShipmentDetailsProps> = ({ shipment }) => {
       <div className="flex justify-between">
         <div>
           <div className="mb-1">
-            {shipment.shipperCity} To {shipment.consigneeCity}, {shipment.province}
+            {shipment.shipperCity}, {shipment.province} To {shipment.consigneeCity}, {shipment.province}
           </div>
           {getDeliveryInfo()}
         </div>
