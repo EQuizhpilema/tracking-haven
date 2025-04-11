@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShipmentData } from '@/data/shipmentData';
-import { CheckCircle, Truck, Building } from 'lucide-react';
+import { CheckCircle, Truck } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ShipmentHeaderProps {
@@ -8,9 +8,7 @@ interface ShipmentHeaderProps {
 }
 
 const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
-  // Function to extract just the status without the date
   const getStatusText = (status: string) => {
-    // Common status patterns to extract
     const statusPatterns = [
       'Delivered',
       'Out For Delivery',
@@ -20,14 +18,12 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
       'Delayed'
     ];
     
-    // Find the first status pattern that matches
     for (const pattern of statusPatterns) {
       if (status.includes(pattern)) {
         return pattern;
       }
     }
     
-    // If no pattern matches, return the first part of the status (before "on" or "-")
     if (status.includes(' on ')) {
       return status.split(' on ')[0].trim();
     }
@@ -46,7 +42,7 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
     <div className="mb-3">
       <div className="flex justify-between items-start pr-4">
         <div>
-          <div className="text-xs text-gray-500 mb-1">Consignee</div>
+          <div className="text-xs text-gray-500">Consignee</div>
           <h3 className="font-bold">{shipment.shipTo}</h3>
           <div className="text-blue-600">
             <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
