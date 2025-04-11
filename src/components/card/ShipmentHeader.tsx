@@ -55,6 +55,11 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
           <div className="text-sm text-gray-600">
             BOL/Ref# {shipment.bolRefs}
           </div>
+          {shipment.puPartnerPro && (
+            <div className="text-sm text-gray-600">
+              PU PARTNER PRO {shipment.puPartnerPro}
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-end">
           <span className="text-md font-semibold text-black"> {/* Increased text size and added font-semibold */}

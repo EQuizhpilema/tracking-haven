@@ -1,4 +1,3 @@
-
 export interface ShipmentData {
   id: string;
   shipDate: string;
@@ -33,7 +32,7 @@ export const shipmentData: ShipmentData[] = [
     province: 'WA',
     zip: '98632',
     status: 'Out For Delivery on 04/04/25',
-    puPartnerPro: '165962424',
+    puPartnerPro: 'Daylight Miami #14848088',
     delPartnerPro: '',
     onTime: 'Yes'
   },
