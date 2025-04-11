@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ShipmentData } from '@/data/shipmentData';
 import { CheckCircle, Truck } from 'lucide-react';
@@ -7,11 +8,6 @@ interface ShipmentHeaderProps {
 }
 
 const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
-  // Format route as "City, State to City, State"
-  const formatRoute = () => {
-    return `${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`;
-  };
-
   // Function to extract just the status without the date
   const getStatusText = (status: string) => {
     // Common status patterns to extract
@@ -48,7 +44,7 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
 
   return (
     <div className="mb-3">
-      <div className="flex justify-between items-start pr-4">
+      <div className="flex justify-between items-start pr-4"> {/* Added pr-4 for right padding */}
         <div>
           <h3 className="font-bold">{shipment.shipper}</h3>
           <div className="text-blue-600">
@@ -59,19 +55,16 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
           <div className="text-sm text-gray-600">
             BOL/Ref# {shipment.bolRefs}
           </div>
-          <div className="text-sm text-gray-700">
-            {formatRoute()}
-          </div>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-md font-semibold text-black">
+          <span className="text-md font-semibold text-black"> {/* Increased text size and added font-semibold */}
             {statusText}
           </span>
           <div className="mt-1">
             {isDelivered ? (
-              <CheckCircle size={24} className="text-tracking-success" />
+              <CheckCircle size={24} className="text-tracking-success" /> // Increased icon size
             ) : (
-              <Truck size={24} className="text-tracking-blue" />
+              <Truck size={24} className="text-tracking-blue" /> // Increased icon size
             )}
           </div>
         </div>
