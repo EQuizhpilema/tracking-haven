@@ -61,7 +61,7 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
             BOL/Ref# {shipment.bolRefs}
           </div>
           <div className="text-sm text-gray-700">
-            {`${shipment.shipperCity}, ${shipment.province} to ${shipment.consigneeCity}, ${shipment.province}`}
+            {formatRoute()}
           </div>
         </div>
         <div className="flex flex-col items-end">
