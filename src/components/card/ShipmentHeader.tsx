@@ -46,7 +46,7 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
     <div className="mb-3">
       <div className="flex justify-between items-start pr-4"> {/* Added pr-4 for right padding */}
         <div>
-          <h3 className="font-bold">{shipment.shipper}</h3>
+          <h3 className="font-bold">{shipment.shipTo}</h3>
           <div className="text-blue-600">
             <a href={`#${shipment.shipmentNumber}`} className="hover:underline">
               {shipment.shipmentNumber}
