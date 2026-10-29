@@ -66,8 +66,8 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
                 : 'border-primary bg-primary/10 text-primary'
             }`}
           >
-            {isDelivered && <Check size={14} strokeWidth={3} />}
             {statusText}
+            {isDelivered && <Check size={14} strokeWidth={3} />}
           </span>
         </div>
       </div>
