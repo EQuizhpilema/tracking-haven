@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShipmentData } from '@/data/shipmentData';
-import { CheckCircle, Truck } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ShipmentHeaderProps {
@@ -58,17 +58,17 @@ const ShipmentHeader: React.FC<ShipmentHeaderProps> = ({ shipment }) => {
             </div>
           )}
         </div>
-        <div className="flex flex-col items-end text-right">
-          <span className="text-md font-semibold text-black">
+        <div className="flex flex-col items-end text-right shrink-0">
+          <span
+            className={`inline-flex items-center gap-1 rounded-full border px-3 py-0.5 text-xs font-semibold whitespace-nowrap ${
+              isDelivered
+                ? 'border-green-600 bg-green-50 text-green-700'
+                : 'border-primary bg-primary/10 text-primary'
+            }`}
+          >
+            {isDelivered && <Check size={14} strokeWidth={3} />}
             {statusText}
           </span>
-          <div className="mt-1">
-            {isDelivered ? (
-              <CheckCircle size={24} className="text-tracking-success" />
-            ) : (
-              <Truck size={24} className="text-tracking-blue" />
-            )}
-          </div>
         </div>
       </div>
     </div>
